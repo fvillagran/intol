@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="
+   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+   <!-- datasource -->
+   <bean id="dsB2B" class="cl.pragma.tools.proxool.ProxoolDataSource">
+      <constructor-arg value="${proxool.b2b.poolName}"/>
+      <property name="driver"                         value="${proxool.b2b.driver}"/>
+      <property name="driverUrl"                      value="${proxool.b2b.url}"/>
+      <property name="user"                           value="${proxool.b2b.username}" />
+      <property name="password"                       value="${proxool.b2b.password}" />
+      <property name="houseKeepingTestSql"            value="${proxool.b2b.houseKeepingTestSql}" />
+      <property name="maximumConnectionCount"         value="${proxool.b2b.maximumConnectionCount}" />
+      <property name="minimumConnectionCount"         value="${proxool.b2b.minimumConnectionCount}" />
+      <property name="simultaneousBuildThrottle"      value="${proxool.b2b.simultaneousBuildThrottle}" />
+      <property name="recentlyStartedThreshold"       value="${proxool.b2b.recentlyStartedThreshold}" />
+      <property name="overloadWithoutRefusalLifetime" value="${proxool.b2b.overloadWithoutRefusalLifetime}" />
+      <property name="maximumActiveTime"              value="${proxool.b2b.maximumActiveTime}" />
+      <property name="verbose"                        value="${proxool.b2b.verbose}" />
+      <property name="trace"                          value="${proxool.b2b.trace}" />
+      <property name="fatalSqlException"              value="${proxool.b2b.fatalSqlException}" />
+      <property name="prototypeCount"                 value="${proxool.b2b.prototypeCount}" />
+      <property name="houseKeepingSleepTime"          value="${proxool.b2b.houseKeepingSleepTime}" />
+      <property name="maximumConnectionLifetime"      value="${proxool.b2b.maximumConnectionLifetime}" />
+   </bean> 
+
+   <bean id="dsSAB" class="cl.pragma.tools.proxool.ProxoolDataSource">
+      <constructor-arg value="${proxool.sab.poolName}"/>
+      <property name="driver"                         value="${proxool.sab.driver}"/>
+      <property name="driverUrl"                      value="${proxool.sab.url}"/>
+      <property name="user"                           value="${proxool.sab.username}" />
+      <property name="password"                       value="${proxool.sab.password}" />
+      <property name="houseKeepingTestSql"            value="${proxool.sab.houseKeepingTestSql}" />
+      <property name="maximumConnectionCount"         value="${proxool.sab.maximumConnectionCount}" />
+      <property name="minimumConnectionCount"         value="${proxool.sab.minimumConnectionCount}" />
+      <property name="simultaneousBuildThrottle"      value="${proxool.sab.simultaneousBuildThrottle}" />
+      <property name="recentlyStartedThreshold"       value="${proxool.sab.recentlyStartedThreshold}" />
+      <property name="overloadWithoutRefusalLifetime" value="${proxool.sab.overloadWithoutRefusalLifetime}" />
+      <property name="maximumActiveTime"              value="${proxool.sab.maximumActiveTime}" />
+      <property name="verbose"                        value="${proxool.sab.verbose}" />
+      <property name="trace"                          value="${proxool.sab.trace}" />
+      <property name="fatalSqlException"              value="${proxool.sab.fatalSqlException}" />
+      <property name="prototypeCount"                 value="${proxool.sab.prototypeCount}" />
+      <property name="houseKeepingSleepTime"          value="${proxool.sab.houseKeepingSleepTime}" />
+      <property name="maximumConnectionLifetime"      value="${proxool.sab.maximumConnectionLifetime}" />
+   </bean> 
+
+   <bean id="dsSRX" class="cl.pragma.tools.proxool.ProxoolDataSource">
+      <constructor-arg value="${proxool.srx.poolName}"/>
+      <property name="driver"                         value="${proxool.srx.driver}"/>
+      <property name="driverUrl"                      value="${proxool.srx.url}"/>
+      <property name="user"                           value="${proxool.srx.username}" />
+      <property name="password"                       value="${proxool.srx.password}" />
+      <property name="houseKeepingTestSql"            value="${proxool.srx.houseKeepingTestSql}" />
+      <property name="maximumConnectionCount"         value="${proxool.srx.maximumConnectionCount}" />
+      <property name="minimumConnectionCount"         value="${proxool.srx.minimumConnectionCount}" />
+      <property name="simultaneousBuildThrottle"      value="${proxool.srx.simultaneousBuildThrottle}" />
+      <property name="recentlyStartedThreshold"       value="${proxool.srx.recentlyStartedThreshold}" />
+      <property name="overloadWithoutRefusalLifetime" value="${proxool.srx.overloadWithoutRefusalLifetime}" />
+      <property name="maximumActiveTime"              value="${proxool.srx.maximumActiveTime}" />
+      <property name="verbose"                        value="${proxool.srx.verbose}" />
+      <property name="trace"                          value="${proxool.srx.trace}" />
+      <property name="fatalSqlException"              value="${proxool.srx.fatalSqlException}" />
+      <property name="prototypeCount"                 value="${proxool.srx.prototypeCount}" />
+      <property name="houseKeepingSleepTime"          value="${proxool.srx.houseKeepingSleepTime}" />
+      <property name="maximumConnectionLifetime"      value="${proxool.srx.maximumConnectionLifetime}" />
+   </bean> 
+ 
+   <bean id="dsTRL" class="cl.pragma.tools.proxool.ProxoolDataSource">
+      <constructor-arg value="${proxool.trl.poolName}"/>
+      <property name="driver"                         value="${proxool.trl.driver}"/>
+      <property name="driverUrl"                      value="${proxool.trl.url}"/>
+      <property name="user"                           value="${proxool.trl.username}" />
+      <property name="password"                       value="${proxool.trl.password}" />
+      <property name="houseKeepingTestSql"            value="${proxool.trl.houseKeepingTestSql}" />
+      <property name="maximumConnectionCount"         value="${proxool.trl.maximumConnectionCount}" />
+      <property name="minimumConnectionCount"         value="${proxool.trl.minimumConnectionCount}" />
+      <property name="simultaneousBuildThrottle"      value="${proxool.trl.simultaneousBuildThrottle}" />
+      <property name="recentlyStartedThreshold"       value="${proxool.trl.recentlyStartedThreshold}" />
+      <property name="overloadWithoutRefusalLifetime" value="${proxool.trl.overloadWithoutRefusalLifetime}" />
+      <property name="maximumActiveTime"              value="${proxool.trl.maximumActiveTime}" />
+      <property name="verbose"                        value="${proxool.trl.verbose}" />
+      <property name="trace"                          value="${proxool.trl.trace}" />
+      <property name="fatalSqlException"              value="${proxool.trl.fatalSqlException}" />
+      <property name="prototypeCount"                 value="${proxool.trl.prototypeCount}" />
+      <property name="houseKeepingSleepTime"          value="${proxool.trl.houseKeepingSleepTime}" />
+      <property name="maximumConnectionLifetime"      value="${proxool.trl.maximumConnectionLifetime}" />
+   </bean> 
+
+   <bean id="dsSABTOTTUS" class="cl.pragma.tools.proxool.ProxoolDataSource">
+      <constructor-arg value="${proxool.sabtottus.poolName}"/>
+      <property name="driver"                         value="${proxool.sabtottus.driver}"/>
+      <property name="driverUrl"                      value="${proxool.sabtottus.url}"/>
+      <property name="user"                           value="${proxool.sabtottus.username}" />
+      <property name="password"                       value="${proxool.sabtottus.password}" />
+      <property name="houseKeepingTestSql"            value="${proxool.sabtottus.houseKeepingTestSql}" />
+      <property name="maximumConnectionCount"         value="${proxool.sabtottus.maximumConnectionCount}" />
+      <property name="minimumConnectionCount"         value="${proxool.sabtottus.minimumConnectionCount}" />
+      <property name="simultaneousBuildThrottle"      value="${proxool.sabtottus.simultaneousBuildThrottle}" />
+      <property name="recentlyStartedThreshold"       value="${proxool.sabtottus.recentlyStartedThreshold}" />
+      <property name="overloadWithoutRefusalLifetime" value="${proxool.sabtottus.overloadWithoutRefusalLifetime}" />
+      <property name="maximumActiveTime"              value="${proxool.sabtottus.maximumActiveTime}" />
+      <property name="verbose"                        value="${proxool.sabtottus.verbose}" />
+      <property name="trace"                          value="${proxool.sabtottus.trace}" />
+      <property name="fatalSqlException"              value="${proxool.sabtottus.fatalSqlException}" />
+      <property name="prototypeCount"                 value="${proxool.sabtottus.prototypeCount}" />
+      <property name="houseKeepingSleepTime"          value="${proxool.sabtottus.houseKeepingSleepTime}" />
+      <property name="maximumConnectionLifetime"      value="${proxool.sabtottus.maximumConnectionLifetime}" />
+   </bean> 
+
+   <!-- Persistence -->
+   <bean id="sqlMapClientB2B" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+      <property name="dataSource" ref="dsB2B" />
+      <property name="configLocation" value="classpath:sql-map-config-b2b.xml" />
+   </bean>
+
+   <bean id="sqlMapClientSAB" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+      <property name="dataSource" ref="dsSAB" />
+      <property name="configLocation" value="classpath:sql-map-config-sab.xml" />
+   </bean>
+
+   <bean id="sqlMapClientSRX" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+      <property name="dataSource" ref="dsSRX" />
+      <property name="configLocation" value="classpath:sql-map-config-srx.xml" />
+   </bean>
+   
+   <bean id="sqlMapClientTRL" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+      <property name="dataSource" ref="dsTRL" />
+      <property name="configLocation" value="classpath:sql-map-config-trl.xml" />
+   </bean>
+
+   <bean id="sqlMapClientSABTOTTUS" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+      <property name="dataSource" ref="dsSABTOTTUS" />
+      <property name="configLocation" value="classpath:sql-map-config-sabtottus.xml" />
+   </bean>
+
+   <bean id="sqlMapClientTemplateB2B" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+      <property name="sqlMapClient" ref="sqlMapClientB2B" />
+   </bean>
+
+   <bean id="sqlMapClientTemplateSAB" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+      <property name="sqlMapClient" ref="sqlMapClientSAB" />
+   </bean>
+
+   <bean id="sqlMapClientTemplateSRX" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+      <property name="sqlMapClient" ref="sqlMapClientSRX" />
+   </bean>
+
+   <bean id="sqlMapClientTemplateTRL" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+      <property name="sqlMapClient" ref="sqlMapClientTRL" />
+   </bean>
+
+  <bean id="sqlMapClientTemplateSABTOTTUS" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+      <property name="sqlMapClient" ref="sqlMapClientSABTOTTUS" />
+   </bean>   
+   
+   <!-- DAO -->
+   <bean id="b2bDAO" class="cl.falabella.b2b.intol.dao.impl.B2bDAOImpl">
+      <property name="sqlMapClientTemplate" ref="sqlMapClientTemplateB2B" />
+   </bean>
+
+   <bean id="srxDAO" class="cl.falabella.b2b.intol.dao.impl.SrxDAOImpl">
+      <property name="sqlMapClientTemplate" ref="sqlMapClientTemplateSRX" />
+   </bean>
+
+   <bean id="sabDAO" class="cl.falabella.b2b.intol.dao.impl.SabDAOImpl">
+      <property name="sqlMapClientTemplate" ref="sqlMapClientTemplateSAB" />
+   </bean>
+   
+   <bean id="trlDAO" class="cl.falabella.b2b.intol.dao.impl.TrlDAOImpl">
+      <property name="sqlMapClientTemplate" ref="sqlMapClientTemplateTRL" />
+   </bean>   
+
+   <bean id="sabTottusDAO" class="cl.falabella.b2b.intol.dao.impl.SabTottusDAOImpl">
+      <property name="sqlMapClientTemplate" ref="sqlMapClientTemplateSABTOTTUS" />
+   </bean>   
+
+   
+</beans>

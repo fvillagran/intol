@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://b2b.falabella.com/schemas/ol/entrega-documento-request"
+    targetNamespace="http://b2b.falabella.com/schemas/ol/entrega-documento-request"
+    elementFormDefault="qualified">
+    
+    <xs:element name="entrega-documento-request" type="entrega-documento-request"/>
+
+    <xs:complexType name="entrega-documento-request">
+        <xs:sequence>
+            <xs:element name="tipo-documento" type="tipo-documento" />
+            <xs:element name="folio" type="xs:positiveInteger" />
+            <xs:element name="patente" type="patente" />
+            <xs:element name="fecha-evento" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="latitud" type="xs:double" minOccurs="0" default="0"/>
+            <xs:element name="longitud" type="xs:double" minOccurs="0" default="0"/>
+            <xs:element name="codigo-no-entrega" type="codigo-no-entrega" />
+            <xs:element name="rut-receptor" type="rut" />
+            <xs:element name="parentesco" type="parentesco" />
+            <xs:element name="bultos" type="bultos" minOccurs="0"/>
+            <xs:element name="autorizacion" type="autorizacion" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="tipo-documento">
+        <xs:restriction base="xs:string">
+            <!-- xs:enumeration value="F11"/ -->
+            <xs:enumeration value="F12"/>
+            <xs:enumeration value="SOR"/>
+            <xs:enumeration value="RET"/>
+            <xs:enumeration value="ENV"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="patente">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="codigo-no-entrega">
+        <xs:restriction base="xs:int">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="99"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:complexType name="rut">
+        <xs:sequence>
+            <xs:element name="mantisa" type="xs:positiveInteger"  />
+            <xs:element name="dv">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[0-9]|K"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+   
+    <xs:simpleType name="bultos">
+        <xs:restriction base="xs:int">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="99"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="parentesco">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CONYUGE"/>
+            <xs:enumeration value="TRABAJADOR"/>
+            <xs:enumeration value="CONSERJE"/>
+            <xs:enumeration value="HIJO"/>
+            <xs:enumeration value="PADRE"/>
+            <xs:enumeration value="SUEGRO"/>
+            <xs:enumeration value="TIO"/>
+            <xs:enumeration value="SOBRINO"/>
+            <xs:enumeration value="AMIGO"/>
+            <xs:enumeration value="VECINO"/>
+            <xs:enumeration value="CLIENTE"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="autorizacion">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CON_AUTORIZACION"/>
+            <xs:enumeration value="FUERA_LINEA"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+</xs:schema>

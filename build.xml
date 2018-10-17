@@ -1,0 +1,226 @@
+<project name="GENERICO" default="site" >
+    <!-- $Id: build_sites.xml,v 1.5 2005/10/19 15:48:27 ingsist Exp $ -->
+    <description>
+        Genera todos los sitios
+    </description>
+  <!-- set global properties for this build -->
+
+  <property environment="env"/>
+
+  <property name="site"        location="../site"/>
+  <property name="sitecustom"  location="../site.custom"/>
+  <property name="siteclass"   location="${site}/WEB-INF/classes"/>
+  <property name="sitelib"     location="${site}/WEB-INF/lib"/>
+  <property name="sitejsp"     location="${site}/WEB-INF/jsp"/>
+  <property name="siteinf"     location="${site}/WEB-INF"/>
+  <property name="files"       location="../files"/>
+
+  <property name="tomcatlib" location="${env.TOMCAT_COMMON_LIB}" /> 
+  <!-- <property name="tomcatlib" location="/opt/apache-tomcat-6.0.20/lib/" /> -->
+  <!-- Obtener librerias del repositorio -->
+ 
+  <fileset id="fileset.repolib" dir="." >
+    <include name="**/WEB-INF/lib/*.jar"/>
+  </fileset>
+
+  <fileset id="fileset.myrepolib" dir="." >
+    <include name="**/src/main/webapp/WEB-INF/lib/*.jar"/>
+  </fileset>
+
+  <path id="path.repolib" >
+    <fileset refid="fileset.repolib" />
+  </path>
+
+  <property name="path.repolib" refid="path.repolib" />
+
+  <!-- Obtener librerias del tomcat -->
+  <fileset id="fileset.tomcatlib" dir="${tomcatlib}">
+    <include name="**/servlet-api.jar"/>
+    <include name="**/jsp-api.jar"/>
+  </fileset>
+
+  <target name="dirs_logica" depends="init">
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${site}"/>
+    <mkdir dir="${site}/WEB-INF"/>
+    <mkdir dir="${site}/WEB-INF/attachments"/>
+    <mkdir dir="${sitecustom}"/>
+    <mkdir dir="${sitecustom}/WEB-INF"/>
+    <mkdir dir="${sitecustom}/WEB-INF/attachments"/>
+    <mkdir dir="${siteclass}"/>
+    <mkdir dir="${sitelib}"/>
+    <mkdir dir="${sitejsp}"/>
+    <mkdir dir="${files}"/>
+    <mkdir dir="${files}/bin"/>
+    <mkdir dir="${files}/DATA"/>
+    <mkdir dir="${files}/LOG"/>
+    <mkdir dir="${files}/TMP"/>
+  </target>
+
+  <target name="dirs_grafica" depends="init">
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${site}"/>
+  </target>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+
+    <pathconvert property="fileset.repolib"  refid="fileset.repolib" pathsep=", " />
+    <condition property="is.fileset.repolib">
+      <not>
+        <equals arg1="${fileset.repolib}" arg2="" />
+      </not>
+    </condition>
+
+    <pathconvert property="fileset.tomcatlib"  refid="fileset.tomcatlib" pathsep=", " />
+    <condition property="is.fileset.tomcatlib">
+      <not>
+        <equals arg1="${fileset.tomcatlib}" arg2="" />
+      </not>
+    </condition>
+  </target>
+
+  <target name="makelogica" depends="dirs_logica" description="Arma sitio de logica" >
+    <copy todir="${files}" preservelastmodified="true" verbose="true" includeEmptyDirs="false" >
+         <fileset dir="./files">
+         </fileset>
+    </copy>
+
+    <!-- Se cambia permisos, de ejecucion de escritura para admwebap y tomcat -->
+    <exec dir="." executable="/bin/chmod" os="Linux" output="../exec.txt">
+        <arg line="-R 775 ../files"/>
+    </exec>
+
+    <!-- Armar javasrc -->
+    <path id="javasrc">
+      <dirset dir="." >
+        <include name="**/src/main/java"/>
+        <include name="**/src/main/resources"/>
+      </dirset>
+    </path>
+
+    <!-- *******************************************************
+       Copia **/src/main/webapp/WEB-INF a site/WEB-INF
+    ******************************************************** -->
+    <copy todir="${site}/WEB-INF" preservelastmodified="true" verbose="true" includeEmptyDirs="false" >
+        <fileset dir=".">
+           <include name="**/src/main/webapp/WEB-INF/**"/>
+           <exclude name="**/src/main/webapp/WEB-INF/lib/*.jar" />
+           <exclude name="**/src/main/webapp/WEB-INF/**/*.jasper" />
+           <exclude name="**/src/main/webapp/WEB-INF/**/*.jsp" />
+       </fileset>
+       <mapper type="regexp" from="^.*src\/main\/webapp\/WEB-INF\/(.*)$" to="\1" />
+    </copy>
+
+    <!-- Set Property javasrc -->
+    <property name="javasrc" refid="javasrc"/>
+
+    <!-- ***********************************************************
+       Compile the java code from ${javasrc} into ${siteclass}
+    **************************************************************** -->
+    <depend srcdir="${javasrc}"  destdir="${siteclass}">
+      <classpath>
+        <fileset refid="fileset.myrepolib" />
+        <fileset refid="fileset.tomcatlib" />
+      </classpath>
+    </depend>
+
+    <echo>
+      libreria para CMRCORP b2c
+      ${env.LD_LIBRARY_PATH}
+    </echo>
+
+    <echo>
+      CLASSPATH
+
+      REPO: ${fileset.repolib}
+      TOMCAT: ${fileset.tomcatlib}
+    </echo>
+
+    <javac  srcdir="${javasrc}"
+            destdir="${siteclass}"
+            memoryMaximumSize="200m"
+            deprecation="on"
+            fork="true"
+            debug="on"
+    >
+      <classpath>
+        <fileset refid="fileset.repolib" />
+        <fileset refid="fileset.tomcatlib" />
+      </classpath>
+    </javac>
+
+    <!-- Copia jar y zip a WEB-INF/lib -->
+    <!-- Copia todo los que no sea jar y zip a WEB-INF/lib -->
+    
+    <copy todir="${site}/WEB-INF/lib" preservelastmodified="true" verbose="true" includeEmptyDirs="false" flatten="true" >
+        <fileset refid="fileset.myrepolib" />
+    </copy>
+    
+    <!-- ************************************************************
+       Copia todo lo que este en src con algunas excepciones
+    ***************************************************************** -->
+    <copy todir="${siteclass}" preservelastmodified="true" verbose="true" includeEmptyDirs="false" >
+       <fileset dir=".">
+           <include name="**/src/main/resources/**"/>
+       </fileset>
+       <mapper type="regexp" from="^.*src\/main\/resources\/(.*)$" to="\1" />
+    </copy>
+
+    <!-- ***************************************************
+       Copia **/src/main/webapp/** a **/   (solo JSP y templates jasper)
+    ******************************************************** -->
+    <copy todir="${site}" preservelastmodified="true" verbose="true" includeEmptyDirs="false" >
+       <fileset dir=".">
+           <include name="**/src/main/webapp/**/*.jsp"/>
+           <include name="**/src/main/webapp/**/*.jasper"/>
+       </fileset>
+       <mapper type="regexp" from="^.*src\/main\/webapp\/(.*)$" to="\1" />
+    </copy>
+
+    <exec dir="." executable="/bin/sleep" os="Linux">
+        <arg line="3"/>
+    </exec>
+
+    <!-- Actualizamos site.custom, por si alguien cambio algun parametro, el que estan en site.custom es el que vale -->
+    <touch>
+       <fileset dir="${sitecustom}"/>
+    </touch>
+
+    <copy todir="${site}" preservelastmodified="true" verbose="true" includeEmptyDirs="false" overwrite="true" >
+       <fileset dir="${sitecustom}">
+       </fileset>
+    </copy>
+  </target>
+
+  <target name="makegrafica" depends="dirs_grafica" description="Copia grafica a site" >
+    <!-- ******************************************************
+       Copia **/src/main/webapp/** a **/**  (grafica)
+    ******************************************************** -->
+    <copy todir="${site}" preservelastmodified="true" verbose="true" includeEmptyDirs="false" >
+       <fileset dir=".">
+           <include name="**/src/main/webapp/**"/>
+           <exclude name="**/src/main/webapp/WEB-INF/**"/>
+           <exclude name="**/src/main/webapp/**/*.jsp"/>
+       </fileset>
+       <mapper type="regexp" from="^.*src\/main\/webapp\/(.*)$" to="\1" />
+    </copy>
+  </target>
+
+  <target name="sitegrafica" depends="makegrafica"
+        description="Arma sitio de grafica" >
+  </target>
+
+  <target name="sitelogica" depends="makelogica"
+        description="Arma sitio de logica" >
+  </target>
+
+  <target name="site" depends="sitegrafica,sitelogica"
+        description="Arma sitio de logica y grafica" >
+  </target>
+
+  <target name="clean" description="clean up" >
+    <delete dir="${site}"/>
+  </target>
+</project>

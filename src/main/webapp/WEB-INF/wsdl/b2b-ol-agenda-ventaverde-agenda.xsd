@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://b2b.falabella.com/schemas/ol/ventaverde-agenda" targetNamespace="http://b2b.falabella.com/schemas/ol/ventaverde-agenda" elementFormDefault="qualified">
+	<xs:element name="Archivo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Consignatario" type="xs:string"/>
+				<xs:element name="Empresa" type="xs:string"/>
+				<xs:element name="Proveedor" type="xs:string"/>
+				<xs:element name="Almacen" type="xs:string"/>
+				<xs:element name="TipoMuelle" type="xs:string"/>
+				<xs:element name="EntradaUnica" type="xs:string"/>
+				<xs:element name="FechaEntrega" type="xs:string"/>
+				<xs:element name="HoraInicio" type="xs:string"/>
+				<xs:element name="HoraTermino" type="xs:string" minOccurs="0"/>
+				<xs:element name="Muelles" type="Muelles" minOccurs="0"/>
+				<xs:element name="Error" type="Error" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>	
+	
+	<xs:complexType name="Muelles">
+		<xs:sequence>
+			<xs:element name="Muelle" type="Muelle" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Muelle">
+		<xs:sequence>
+			<xs:element name="Num" type="xs:int"/>
+			<xs:element name="Codigo" type="xs:string"/>
+			<xs:element name="Uso" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Error">
+		<xs:sequence>
+			<xs:element name="Codigo" type="xs:string"/>
+			<xs:element name="Descripcion" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

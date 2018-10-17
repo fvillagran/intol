@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  targetNamespace="http://b2b.falabella.com/service/ol/info-cambioestado"
+                  xmlns:tns="http://b2b.falabella.com/service/ol/info-cambioestado"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:ce="http://b2b.falabella.com/schemas/ol/info-cambioestado-request"
+                  xmlns:cer="http://b2b.falabella.com/schemas/ol/info-cambioestado-response"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+ <wsdl:types>
+  <xs:schema elementFormDefault="qualified">
+   <xs:import namespace="http://b2b.falabella.com/schemas/ol/info-cambioestado-request"
+              schemaLocation="b2b-info-cambioestado-request.xsd"/>
+   <xs:import namespace="http://b2b.falabella.com/schemas/ol/info-cambioestado-response"
+              schemaLocation="b2b-info-cambioestado-response.xsd"/>
+  </xs:schema>
+ </wsdl:types>
+ <wsdl:message name="cambioEstadoRequest">
+  <wsdl:part name="request" element="ce:info-cambioestado-request"/>
+ </wsdl:message>
+ <wsdl:message name="cambioEstadoResponse">
+  <wsdl:part name="response" element="cer:info-cambioestado-response"/>
+ </wsdl:message>
+ <wsdl:portType name="InfoCambioEstadoService">
+  <wsdl:operation name="cambioEstado">
+   <wsdl:input message="tns:cambioEstadoRequest"/>
+   <wsdl:output message="tns:cambioEstadoResponse"/>
+  </wsdl:operation>
+ </wsdl:portType>
+ <wsdl:binding name="InfoCambioEstadoServiceBinding"
+               type="tns:InfoCambioEstadoService">
+  <soap:binding style="document"
+                transport="http://schemas.xmlsoap.org/soap/http"/>
+  <wsdl:operation name="cambioEstado">
+   <soap:operation soapAction=""/>
+   <wsdl:input>
+    <soap:body use="literal"/>
+   </wsdl:input>
+   <wsdl:output>
+    <soap:body use="literal"/>
+   </wsdl:output>
+  </wsdl:operation>
+ </wsdl:binding>
+ <wsdl:service name="InfoCambioEstadoService">
+  <wsdl:port name="InfoCambioEstadoService"
+             binding="tns:InfoCambioEstadoServiceBinding">
+   <soap:address location="http://127.0.0.1/InfoCambioEstadoService"/>
+  </wsdl:port>
+ </wsdl:service>
+</wsdl:definitions>

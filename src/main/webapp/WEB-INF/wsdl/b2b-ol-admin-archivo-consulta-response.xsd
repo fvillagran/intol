@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://b2b.falabella.com/schemas/ol/admin-archivo-consulta-response"
+    targetNamespace="http://b2b.falabella.com/schemas/ol/admin-archivo-consulta-response"
+    elementFormDefault="qualified">
+    
+   <xs:element name="admin-archivo-consulta-response" type="admin-archivo-consulta-response"/>
+    	
+   <xs:complexType name="admin-archivo-consulta-response">   
+         <xs:sequence>
+            <xs:choice>
+               <xs:element name="file" type="file"/>
+               <xs:element name="error" type="error"/>
+            </xs:choice>
+         </xs:sequence>
+   </xs:complexType>
+	
+   <xs:complexType name="file">
+         <xs:sequence>
+               <xs:element name="status" type="status"/>
+               <xs:element name="errors" type="errors" minOccurs="0"/>
+         </xs:sequence>
+   </xs:complexType>
+        
+    <xs:complexType name="status">
+         <xs:sequence>
+            <xs:element name="id" type="xs:positiveInteger"/>
+            <xs:element name="estado" type="estado"/>
+            <xs:element name="tipo" type="xs:string"/>
+         </xs:sequence>
+    </xs:complexType>
+    
+   <xs:complexType name="errors">
+         <xs:sequence>
+               <xs:element name="error" type="error" maxOccurs="unbounded"/>
+         </xs:sequence>
+   </xs:complexType>
+   
+    <xs:complexType name="error">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="code" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    
+    <xs:complexType name="estado">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="code" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+</xs:schema>

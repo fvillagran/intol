@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions 
+    targetNamespace="http://b2b.falabella.com/service/ol/info-palet" 
+    xmlns:tns="http://b2b.falabella.com/service/ol/info-palet"
+    xmlns:imp="http://b2b.falabella.com/schemas/ol/info-palet-request"
+    xmlns:impr="http://b2b.falabella.com/schemas/ol/info-palet-response"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <wsdl:types>
+        <xs:schema elementFormDefault="qualified">
+            <xs:import namespace="http://b2b.falabella.com/schemas/ol/info-palet-request" schemaLocation="b2b-ol-info-palet-request.xsd" />
+            <xs:import namespace="http://b2b.falabella.com/schemas/ol/info-palet-response" schemaLocation="b2b-ol-info-palet-response.xsd" />
+        </xs:schema>
+    </wsdl:types>
+
+    <wsdl:message name="inMessage">
+        <wsdl:part name="request" element="imp:info-palet-request" />
+    </wsdl:message>
+    
+    <wsdl:message name="outMessage">
+        <wsdl:part name="response" element="impr:info-palet-response" />
+    </wsdl:message>
+    
+    <wsdl:portType name="InfoPaletService">
+        <wsdl:operation name="infoPalet"  >
+            <wsdl:input message="tns:inMessage" />
+            <wsdl:output message="tns:outMessage" />
+        </wsdl:operation>    
+    </wsdl:portType>
+    
+    <wsdl:binding name="InfoPaletServiceBinding" type="tns:InfoPaletService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="infoPalet">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="InfoPaletService">
+        <wsdl:port name="InfoPaletService" binding="tns:InfoPaletServiceBinding">
+            <soap:address location="http://127.0.0.1/EDService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

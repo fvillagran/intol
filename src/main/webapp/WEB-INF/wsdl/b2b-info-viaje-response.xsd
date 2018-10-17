@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://b2b.falabella.com/schemas/ol/info-viaje-response" targetNamespace="http://b2b.falabella.com/schemas/ol/info-viaje-response" elementFormDefault="qualified">
+	<xs:element name="info-viaje-response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="response" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

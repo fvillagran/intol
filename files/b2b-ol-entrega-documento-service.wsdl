@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions 
+    targetNamespace="http://b2b.falabella.com/service/ol/entrega-documento" 
+    xmlns:tns="http://b2b.falabella.com/service/ol/entrega-documento"
+    xmlns:imp="http://b2b.falabella.com/schemas/ol/entrega-documento-request"
+    xmlns:impr="http://b2b.falabella.com/schemas/ol/entrega-documento-response"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <wsdl:types>
+        <xs:schema elementFormDefault="qualified">
+            <xs:import namespace="http://b2b.falabella.com/schemas/ol/entrega-documento-request" schemaLocation="b2b-ol-entrega-documento-request.xsd" />
+            <xs:import namespace="http://b2b.falabella.com/schemas/ol/entrega-documento-response" schemaLocation="b2b-ol-entrega-documento-response.xsd" />
+        </xs:schema>
+    </wsdl:types>
+
+    <wsdl:message name="inMessage">
+        <wsdl:part name="request" element="imp:entrega-documento-request" />
+    </wsdl:message>
+    
+    <wsdl:message name="outMessage">
+        <wsdl:part name="response" element="impr:entrega-documento-response" />
+    </wsdl:message>
+    
+    <wsdl:portType name="EntregaDocumentoService">
+        <wsdl:operation name="entregaDocumento"  >
+            <wsdl:input message="tns:inMessage" />
+            <wsdl:output message="tns:outMessage" />
+        </wsdl:operation>    
+    </wsdl:portType>
+    
+    <wsdl:binding name="EntregaDocumentoServiceBinding" type="tns:EntregaDocumentoService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="entregaDocumento">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="EntregaDocumentoService">
+        <wsdl:port name="EntregaDocumentoService" binding="tns:EntregaDocumentoServiceBinding">
+            <soap:address location="http://127.0.0.1/EDService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

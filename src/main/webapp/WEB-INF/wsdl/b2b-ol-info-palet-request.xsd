@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://b2b.falabella.com/schemas/ol/info-palet-request"
+    targetNamespace="http://b2b.falabella.com/schemas/ol/info-palet-request"
+    elementFormDefault="qualified">
+    
+    <xs:element name="info-palet-request" type="info-palet-request"/>
+
+    <xs:complexType name="info-palet-request">
+        <xs:sequence>
+            <xs:element name="numero-palet" type="xs:string" />
+            <xs:element name="numero-expedicion" type="xs:integer" />
+            <xs:element name="cantidad-bultos" type="xs:integer" />
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

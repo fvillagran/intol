@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sab">
+   <parameterMap id="infoPalet-param" class="map" >         
+      <parameter property="r"          jdbcType="CLOB"      javaType="java.lang.String"     mode="OUT" />
+      <parameter property="empresa"    jdbcType="VARCHAR"   javaType="java.lang.String"     mode="IN" />
+      <parameter property="expedicion" jdbcType="NUMERIC"   javaType="java.math.BigDecimal" mode="IN" />
+      <parameter property="palet"      jdbcType="VARCHAR"   javaType="java.lang.String"     mode="IN" />
+      <parameter property="bultos"     jdbcType="NUMERIC"   javaType="java.math.BigDecimal" mode="IN" />
+      <parameter property="tipoCarga"  jdbcType="VARCHAR"   javaType="java.lang.String"     mode="IN" />
+   </parameterMap>
+
+   <procedure id="infoPalet" parameterMap="infoPalet-param" >
+      { call ? := LecturaPaletOpeLog(?,?,?,?,?) }
+   </procedure>
+
+    <select id="getTipoDespacho" resultClass="java.lang.String">
+      select distinct XTIPDESP
+      from   f057f12 f
+      where  f.cnpedido         = #nroF12# 
+	  and xtipdesp is not null
+   </select>
+
+<parameterMap id="callAgendaVVSABMap" class="map">
+       <parameter property="xmlresponse" jdbcType="CLOB" javaType="java.lang.String" mode="OUT" />        
+       <parameter property="xmlrequest" jdbcType="CLOB" javaType="java.lang.String" mode="IN"/>
+   </parameterMap>      
+    
+   <!-- funcion para reservar agenda venta en verde  -->
+   <procedure id="callReservaAgendaVVSABMap" parameterMap="callAgendaVVSABMap">  
+      { ? = call B2B_PLANIFICACION_ENTRADA.F_TratarXML_AGENDAR(?) }
+   </procedure>
+    
+   <!-- funcion para obtener las ventanas necesarias -->
+   <procedure id="callVentanasAgendaVVSABMap" parameterMap="callAgendaVVSABMap">  
+      { ? = call B2B_PLANIFICACION_ENTRADA.F_TratarXML_CONSULTAVENTANAS(?) }
+   </procedure>
+   
+   <!-- funcion para obtener la disponibilidad de muelles -->
+   <procedure id="callMuellesAgendaVVSABMap" parameterMap="callAgendaVVSABMap">  
+      { ? = call B2B_PLANIFICACION_ENTRADA.F_TratarXML_CONSULTAMUELLES(?) }
+   </procedure>   
+
+    <select id="getIndicador" resultClass="java.lang.String">       
+        select #tipoDespacho# from sab3_sabprmef
+        where cparamst = 'WS_CORREO'
+        and xvalparamst like '%$tipoDespacho$%'
+   </select>
+   
+   <select id="getValidarRut" resultClass="java.lang.String">       
+     select t.xvalparamst from sab3_sabprmef t
+     where t.cparamst =#indicador#
+     and t.xparamst=#rutProveedor#
+   </select>
+   
+</sqlMap>

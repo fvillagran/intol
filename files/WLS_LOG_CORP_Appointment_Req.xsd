@@ -1,0 +1,572 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:req="http://mdwcorp.falabella.com/LOG/CORP/WLS/schema/WMOS/Appointment/Req/v2017.02" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://mdwcorp.falabella.com/LOG/CORP/WLS/schema/WMOS/Appointment/Req/v2017.02" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+  <xs:element name="AppointmentReq">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ClientService">
+          <xs:complexType>
+		<xs:sequence>
+			<xs:element name="Country" type="req:Country_TYPE"/>
+			<xs:element name="Commerce" type="req:Commerce_TYPE"/>
+			<xs:element name="Channel" type="req:Channel_TYPE"/>
+			<xs:element name="StoreId" type="xs:string" minOccurs="0"/>
+			<xs:element name="TerminalId" type="xs:string" minOccurs="0"/>
+			<xs:element name="Date" type="xs:date" minOccurs="0"/>
+			<xs:element name="Hour" type="xs:time" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+        </xs:element>
+        <xs:element name="Header">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Source" nillable="false">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ActionType" nillable="false">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string"/>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SequenceNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string"/>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BatchId" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ReferenceId" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string"/>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="UserId" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="35"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Password" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string"/>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MessageType" nillable="false">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CompanyId" nillable="false">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="9"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MessageLocale" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MessageTimeZone" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="32"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Version" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SendMessage" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string"/>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CarrierCompany" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string"/>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Sequence" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string"/>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Message">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Appointment" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="AppointmentId" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="75"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="AppointmentType" nillable="false">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="12"/>
+                          <xs:enumeration value="LiveUnload"/>
+                          <xs:enumeration value="DropUnload"/>
+                          <xs:enumeration value="DropEmpty"/>
+                          <xs:enumeration value="LiveLoad"/>
+                          <xs:enumeration value="PickupEmpty"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="FacilityAliasId" nillable="false">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="16"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="AppointmentStatus" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="11"/>
+                          <xs:enumeration value="Unscheduled"/>
+                          <xs:enumeration value="Requested"/>
+                          <xs:enumeration value="Scheduled"/>
+                          <xs:enumeration value="Canceled"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="SealNumber" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string"/>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="CarrierCode" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="10"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="ScheduledDateTime" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string"/>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="ActualCheckInDateTime" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string"/>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="CheckOutDateTime" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string"/>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="LoadUnloadStartDateTime" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string"/>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="LoadUnloadEndDateTime" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string"/>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="AppointmentPriority" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="12"/>
+                          <xs:enumeration value="MostCritical"/>
+                          <xs:enumeration value="Critical"/>
+                          <xs:enumeration value="High"/>
+                          <xs:enumeration value="Normal"/>
+                          <xs:enumeration value="Low"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="DriverDurationInMin" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string"/>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="ControlNumber" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="50"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="RequestorName" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="50"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="RequestorType" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string"/>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="ReservedAppointmentId" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string"/>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="TpCompanyId" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string"/>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="AppointmentReasonId" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string"/>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="AppointmentReasonCode" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="20"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="TrailerDurationInMinutes" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:integer">
+                          <xs:totalDigits value="9"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="DriverId" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="20"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="CancelReasonCode" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="20"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="CommunicationMode" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string"/>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="AppointmentComments" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="255"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="BusinessPartner" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="10"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="CancelIndicator" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string"/>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="LoadPosition" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="4"/>
+                          <xs:enumeration value="Nose"/>
+                          <xs:enumeration value="Tail"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="BusinessUnit" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="9"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="RequestedTime" nillable="false">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="25"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="TemplateId" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string"/>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="CancelledAppointmentId" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string"/>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="AppointmentSource" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string"/>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="LoadConfiguration" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="3"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="EquipmentId" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="20"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="EquipmentCode" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="20"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="TractorId" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="20"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="TractorType" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string"/>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="Equipment" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string"/>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="DockId" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string"/>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="DoorId" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="32"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="ApptObject" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="ObjectType" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:maxLength value="8"/>
+                                <xs:enumeration value="ASN"/>
+                                <xs:enumeration value="Shipment"/>
+                                <xs:enumeration value="PO"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="ObjectId" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:maxLength value="20"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="StopSequence" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:integer">
+                                <xs:totalDigits value="4"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="PurchaseOrder" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="BookedSize" minOccurs="0">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:integer"/>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="SizeUOM" minOccurs="0">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string"/>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="PurchaseOrderId" minOccurs="0">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string"/>
+                                  </xs:simpleType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="AppointmentSlots" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="SlotId" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string"/>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="SlotStartDateTime" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string"/>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="SlotDuration" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:integer"/>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="CapacityUsed" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:integer"/>
+                            </xs:simpleType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="CustomAttribute" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="AttributeName" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string"/>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="AttributeValue" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string"/>
+                            </xs:simpleType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="Country_TYPE">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AR"/>
+			<xs:enumeration value="BR"/>
+			<xs:enumeration value="CL"/>
+			<xs:enumeration value="CO"/>
+			<xs:enumeration value="PE"/>
+			<xs:enumeration value="UY"/>
+			<xs:enumeration value="MX"/>
+		</xs:restriction>
+	</xs:simpleType>
+  <xs:simpleType name="Commerce_TYPE">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Banco"/>
+			<xs:enumeration value="CMR"/>
+			<xs:enumeration value="Falabella"/>
+			<xs:enumeration value="Seguros"/>
+			<xs:enumeration value="Sodimac"/>
+			<xs:enumeration value="Tottus"/>
+			<xs:enumeration value="Movil"/>
+			<xs:enumeration value="Viajes"/>
+			<xs:enumeration value="Falabella Movil"/>
+			<xs:enumeration value="CrateAndBarrel"/>
+			<xs:enumeration value="Telco CMR"/>
+			<xs:enumeration value="Connect"/>
+			<xs:enumeration value="Web Movil Falabella"/>
+			<xs:enumeration value="BackOffice"/>
+			<!-- Falabella Movil Deprecado -->
+		</xs:restriction>
+	</xs:simpleType>
+  <xs:simpleType name="Channel_TYPE">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ASL+"/>
+			<xs:enumeration value="B2B"/>
+			<xs:enumeration value="B2C"/>
+			<xs:enumeration value="Cardif"/>
+			<xs:enumeration value="Comercio Adherido"/>
+			<xs:enumeration value="CRM"/>
+			<xs:enumeration value="Fono Compras"/>
+			<xs:enumeration value="Homy"/>
+			<xs:enumeration value="IVR"/>
+			<xs:enumeration value="Kiosco"/>
+			<xs:enumeration value="Mobile"/>
+			<xs:enumeration value="Mobile-APP"/>
+			<xs:enumeration value="Mobile-WEB"/>
+			<xs:enumeration value="Portal"/>
+			<xs:enumeration value="Presencial"/>
+			<xs:enumeration value="POS"/>
+			<xs:enumeration value="Punto de Venta"/>
+			<xs:enumeration value="SIX"/>
+			<xs:enumeration value="UXPOS"/>
+			<xs:enumeration value="Venta-Empresa"/>
+			<xs:enumeration value="Web"/>
+			<xs:enumeration value="Web CMR"/>
+			<xs:enumeration value="Web-PAC"/>
+			<xs:enumeration value="USSD"/>
+			<xs:enumeration value="Punto de Venta"/>
+			<xs:enumeration value="DIM"/>
+			<xs:enumeration value="PMM"/>
+			<xs:enumeration value="WMOS"/>
+			<xs:enumeration value="SRX"/>
+			<xs:enumeration value="ATG"/>
+			<xs:enumeration value="OMS"/>
+			<xs:enumeration value="TRL"/>
+			<xs:enumeration value="SAB"/>
+			<xs:enumeration value="WEB_PORTAL"/>
+			<xs:enumeration value="BATCH"/>
+			<xs:enumeration value="App-GSVendedor"/>
+			<xs:enumeration value="QuickPay"/>
+			<xs:enumeration value="DAD"/>
+			<xs:enumeration value="SLI"/>
+			<xs:enumeration value="ATM"/>
+			<xs:enumeration value="PCOM"/>
+			<xs:enumeration value="CAJA"/>
+			<xs:enumeration value="SFWEB"/>
+			<xs:enumeration value="Rector"/>
+			<xs:enumeration value="CYBER"/>
+			<xs:enumeration value="PIM"/>
+			<xs:enumeration value="MAEMED"/>
+			<xs:enumeration value="ODBMS"/>
+			<xs:enumeration value="SPR"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

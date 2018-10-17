@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://b2b.falabella.com/schemas/ol/info-documento-response"
+    targetNamespace="http://b2b.falabella.com/schemas/ol/info-documento-response"
+    elementFormDefault="qualified">
+    
+    <xs:element name="info-documento-response" type="info-documento-response"/>
+    	
+    <xs:complexType name="info-documento-response">
+		<xs:sequence>
+			<xs:element name="message" type="message"/>		
+		</xs:sequence>
+    </xs:complexType>
+	
+    <xs:complexType name="message">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="code" type="xs:int" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType> 
+
+</xs:schema>

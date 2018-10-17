@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://b2b.falabella.com/service/ol/info-viaje" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:iv="http://b2b.falabella.com/schemas/ol/info-viaje-request" xmlns:ivr="http://b2b.falabella.com/schemas/ol/info-viaje-response" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://b2b.falabella.com/service/ol/info-viaje">
+	<wsdl:types>
+		<xs:schema elementFormDefault="qualified">
+			<xs:import namespace="http://b2b.falabella.com/schemas/ol/info-viaje-request" schemaLocation="b2b-info-viaje-request.xsd"/>
+			<xs:import namespace="http://b2b.falabella.com/schemas/ol/info-viaje-response" schemaLocation="b2b-info-viaje-response.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="infoViajeRequest">
+		<wsdl:part name="request" element="iv:info-viaje-request"/>
+	</wsdl:message>
+	<wsdl:message name="infoViajeResponse">
+		<wsdl:part name="response" element="ivr:info-viaje-response"/>
+	</wsdl:message>
+	<wsdl:portType name="InfoViajeService">
+		<wsdl:operation name="informarViaje">
+			<wsdl:input message="tns:infoViajeRequest"/>
+			<wsdl:output message="tns:infoViajeResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="InfoViajeServiceBinding" type="tns:InfoViajeService">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="informarViaje">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="InfoViajeService">
+		<wsdl:documentation>Archivo WSDL para InfoViajeService</wsdl:documentation>
+		<wsdl:port name="InfoViajeService" binding="tns:InfoViajeServiceBinding">
+			<soap:address location="http://127.0.0.1/InfoViajeService"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

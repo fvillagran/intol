@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<info-palet-response xmlns="http://b2b.falabella.com/schemas/ol/info-palet-response"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://b2b.falabella.com/schemas/ol/info-palet-response b2b-ol-info-palet-response.xsd">
+        <info-palet>
+            <numero-palet>12345</numero-palet>
+            <suborden>12345</suborden>
+            <numero-f12>12345</numero-f12>
+            <tipo-documento>F12</tipo-documento>
+            <ciudad-origen>SANTIAGO</ciudad-origen>
+            <ciudad-destino>SANTIAGO</ciudad-destino>
+            <peso-completo>0</peso-completo>
+            <tipo-producto>BT</tipo-producto>
+            <cantidad-m3>0</cantidad-m3>
+            <cantidad-bultos>0</cantidad-bultos>
+            <alto>0</alto>
+            <ancho>0</ancho>
+            <largo>0</largo>
+            <tipo-documento-tributario>BOLETA</tipo-documento-tributario>
+            <tipo-contenido>DESCRIPCION</tipo-contenido>
+            <monto-declarado>1234</monto-declarado>
+            <destinatario>
+                <rut>
+                    <mantisa>1</mantisa>
+                    <dv>9</dv>
+                </rut>
+                <nombre>nombre0</nombre>
+                <telefono>123456789</telefono>
+                <direccion>
+                    <calle>calle0</calle>
+                    <comuna>comuna0</comuna>
+                </direccion>
+            </destinatario>
+        </info-palet>
+</info-palet-response>

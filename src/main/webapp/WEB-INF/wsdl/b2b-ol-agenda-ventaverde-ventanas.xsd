@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://b2b.falabella.com/schemas/ol/ventaverde-ventanas" targetNamespace="http://b2b.falabella.com/schemas/ol/ventaverde-ventanas" elementFormDefault="qualified">
+
+	<xs:element name="Archivo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Consignatario" type="xs:string"/>
+				<xs:element name="Empresa" type="xs:string"/>
+				<xs:element name="Proveedor" type="xs:string"/>
+				<xs:element name="Almacen" type="xs:string"/>
+				<xs:element name="TipoMuelle" type="xs:string"/>
+				<xs:element name="EntradaUnica" type="xs:string"/>
+				<xs:element name="Ventanas" type="xs:int" minOccurs="0"/>
+				<xs:element name="Error" type="Error" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+		
+	<xs:complexType name="Error">
+		<xs:sequence>
+			<xs:element name="Codigo" type="xs:string"/>
+			<xs:element name="Descripcion" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

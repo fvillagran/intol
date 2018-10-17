@@ -1,0 +1,44 @@
+<?xml version = '1.0'?>
+<ROWSET>
+    <ROW num="1">
+        <C_SOC>110313472</C_SOC>
+        <N_F12>1294216955</N_F12>
+        <N_PALLET>907490000003230012</N_PALLET>
+        <A_TIPO>F12</A_TIPO>
+        <A_ORIGEN>SANTIAGO</A_ORIGEN>
+        <A_DESTINO>SANTIAGO</A_DESTINO>
+        <C_PESO>1.36</C_PESO>
+        <N_MONTO>53970</N_MONTO>
+        <N_BULTOS>3</N_BULTOS>
+        <A_RUT>12384290-1</A_RUT>
+        <A_NOMBRE>ANA MARIA RAMOS         </A_NOMBRE>
+        <A_DIRECCION>PATRICIO CHAVEZ ,VILLA PEÑAREY #873</A_DIRECCION>
+        <A_COMUNA>LA REINA</A_COMUNA>
+        <PRODUCTOS>
+            <PRODUCTOS_ROW num="1">
+                <A_SKU>2118165</A_SKU>
+                <N_ALTO>0.24</N_ALTO>
+                <N_ANCHO>0.05</N_ANCHO>
+                <N_LARGO>0.15</N_LARGO>
+                <A_DETALLE>5550607741 LEGO DIDACTICOS</A_DETALLE>
+                <QCANTIDA>1</QCANTIDA>
+            </PRODUCTOS_ROW>
+            <PRODUCTOS_ROW num="2">
+                <A_SKU>2298434</A_SKU>
+                <N_ALTO>0.15</N_ALTO>
+                <N_ANCHO>0.05</N_ANCHO>
+                <N_LARGO>0.15</N_LARGO>
+                <A_DETALLE>DMV-H321 DAEWOO MP4</A_DETALLE>
+                <QCANTIDA>1</QCANTIDA>
+            </PRODUCTOS_ROW>
+            <PRODUCTOS_ROW num="3">
+                <A_SKU>2464765</A_SKU>
+                <N_ALTO>0.31</N_ALTO>
+                <N_ANCHO>0.08</N_ANCHO>
+                <N_LARGO>0.44</N_LARGO>
+                <A_DETALLE>68527 ANSALDO ELECTRONICOS</A_DETALLE>
+                <QCANTIDA>1</QCANTIDA>
+            </PRODUCTOS_ROW>
+        </PRODUCTOS>
+    </ROW>
+</ROWSET>

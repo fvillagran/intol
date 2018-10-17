@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://b2b.falabella.com/service/ol/valida-patente" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:vp="http://b2b.falabella.com/schemas/ol/valida-patente-request" xmlns:vpr="http://b2b.falabella.com/schemas/ol/valida-patente-response" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://b2b.falabella.com/service/ol/valida-patente">
+	<wsdl:types>
+		<xs:schema elementFormDefault="qualified">
+			<xs:import namespace="http://b2b.falabella.com/schemas/ol/valida-patente-request" schemaLocation="b2b-valida-patente-request.xsd"/>
+			<xs:import namespace="http://b2b.falabella.com/schemas/ol/valida-patente-response" schemaLocation="b2b-valida-patente-response.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="validaPatenteRequest">
+		<wsdl:part name="request" element="vp:valida-patente-request"/>
+	</wsdl:message>
+	<wsdl:message name="validaPatenteResponse">
+		<wsdl:part name="response" element="vpr:valida-patente-response"/>
+	</wsdl:message>
+	<wsdl:portType name="ValidaPatenteService">
+		<wsdl:operation name="validarGpsPatenteViaje">
+			<wsdl:input message="tns:validaPatenteRequest"/>
+			<wsdl:output message="tns:validaPatenteResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="ValidaPatenteServiceBinding" type="tns:ValidaPatenteService">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="validarGpsPatenteViaje">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="ValidaPatenteService">
+		<wsdl:documentation>Archivo WSDL para ValidaPatenteService</wsdl:documentation>
+		<wsdl:port name="ValidaPatenteService" binding="tns:ValidaPatenteServiceBinding">
+			<soap:address location="http://127.0.0.1/ValidaPatenteService"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://b2b.falabella.com/schemas/ol/info-palet-database"
+    targetNamespace="http://b2b.falabella.com/schemas/ol/info-palet-database"
+    elementFormDefault="qualified">
+    
+    <xs:element name="ROWSET" type="row-set"/>
+
+    <xs:complexType name="row-set">
+        <xs:sequence>
+            <xs:element name="ROW" type="row" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:group name="paletGroup">
+        <xs:sequence>
+            <xs:element name="C_SOC" type="xs:integer" />
+            <xs:element name="N_F12" type="xs:integer" />
+            <xs:element name="F_REP" type="xs:integer" />
+            <xs:element name="N_PALLET" type="xs:string" />
+            <xs:element name="A_TIPO" type="xs:string" />
+            <xs:element name="A_ORIGEN" type="xs:string" />
+            <xs:element name="A_DESTINO" type="xs:string" />
+            <xs:element name="C_PESO" type="xs:decimal" />
+            <xs:element name="N_MONTO" type="xs:decimal" />
+            <xs:element name="N_BULTOS" type="xs:integer" />
+            <xs:element name="A_RUT" type="xs:string" />
+            <xs:element name="A_NOMBRE" type="xs:string" />
+            <xs:element name="A_DIRECCION" type="xs:string" />
+            <xs:element name="A_COMUNA" type="xs:string" />
+            <xs:element name="A_REGION" type="xs:string" />
+            <xs:element name="PRODUCTOS" type="productos" />
+        </xs:sequence>
+    </xs:group>
+
+    <xs:group name="errorGroup">
+        <xs:sequence>
+            <xs:element name="CNUPALET" type="xs:string" />
+            <xs:element name="DERROR" type="xs:string" />
+        </xs:sequence>
+    </xs:group>
+    
+    <xs:complexType name="row">
+        <xs:sequence>
+            <xs:choice>
+                <xs:group ref="paletGroup"/>
+                <xs:group ref="errorGroup"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="num" type="xs:int"/>
+    </xs:complexType>
+    
+    <xs:complexType name="productos">
+        <xs:sequence>
+            <xs:element name="PRODUCTOS_ROW" type="producto" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="producto">
+        <xs:sequence>
+            <xs:element name="A_SKU" type="xs:string" />
+            <xs:element name="N_ALTO" type="xs:decimal" />
+            <xs:element name="N_ANCHO" type="xs:decimal" />
+            <xs:element name="N_LARGO" type="xs:decimal" />
+            <xs:element name="A_DETALLE" type="xs:string" />
+            <xs:element name="QCANTIDA" type="xs:integer" />
+        </xs:sequence>
+        <xs:attribute name="num" type="xs:int"/>
+    </xs:complexType>
+</xs:schema>

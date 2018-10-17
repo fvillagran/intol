@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://b2b.falabella.com/schemas/ol/info-palet-response"
+    targetNamespace="http://b2b.falabella.com/schemas/ol/info-palet-response"
+    elementFormDefault="qualified">
+    
+    <xs:element name="info-palet-response" type="info-palet-response"/>
+    
+    <xs:complexType name="info-palet-response">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="info-palet" type="info-palet"/>
+                <xs:element name="error" type="message"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="info-palet">
+        <xs:sequence>
+            <xs:element name="numero-palet" type="xs:string" />
+            <xs:element name="suborden" type="xs:integer" nillable="true"/>
+            <xs:element name="numero-f12" type="xs:integer" />
+            <xs:element name="numero2-f12" type="xs:integer" nillable="true" />
+			<xs:element name="fecha-f12" type="xs:string" nillable="true" />
+            <xs:element name="tipo-documento" type="tipo-documento" />
+            <xs:element name="ciudad-origen" type="xs:string" nillable="true"/>
+            <xs:element name="ciudad-destino" type="xs:string" nillable="true"/>
+            <xs:element name="peso-completo" type="xs:decimal" />
+            <xs:element name="tipo-producto" type="tipo-producto" nillable="true"/>
+            <xs:element name="cantidad-m3" type="xs:decimal" />
+            <xs:element name="cantidad-bultos" type="xs:integer" />
+            <xs:element name="alto" type="xs:decimal" />
+            <xs:element name="ancho" type="xs:decimal" />
+            <xs:element name="largo" type="xs:decimal" />
+            <xs:element name="tipo-documento-tributario" type="tipo-documento-tributario" nillable="true"/>
+            <xs:element name="tipo-contenido" type="xs:string" nillable="true"/>
+            <xs:element name="monto-declarado" type="xs:decimal"/>
+            <xs:element name="destinatario" type="destinatario" nillable="true"/>
+            <xs:element name="region" type="xs:string" nillable="true"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="destinatario">
+        <xs:sequence>
+            <xs:element name="rut" type="rut" nillable="true" />
+            <xs:element name="nombre" type="xs:string" nillable="true"/>
+            <xs:element name="telefono" type="xs:string" nillable="true"/>
+            <xs:element name="direccion" type="direccion" nillable="true"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="direccion">
+        <xs:sequence>
+            <xs:element name="calle" type="xs:string" nillable="true"/>
+            <xs:element name="comuna" type="xs:string" nillable="true"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="rut">
+        <xs:sequence>
+            <xs:element name="mantisa" type="xs:positiveInteger"  />
+            <xs:element name="dv">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[0-9]|K"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:simpleType name="tipo-documento">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="F11"/>
+            <xs:enumeration value="F12"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="tipo-documento-tributario">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="GUIA"/>
+            <xs:enumeration value="BOLETA"/>
+            <xs:enumeration value="FACTURA"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+
+    <xs:simpleType name="tipo-producto">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="MT"/>
+            <xs:enumeration value="BT"/>
+            <xs:enumeration value="SBT"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="message">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="code" type="xs:int" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+</xs:schema>

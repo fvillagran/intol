@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="B2b">
+
+   <typeAlias alias="extrainfo"     type="cl.falabella.b2b.intol.beans.ExtraInfo" />
+   <typeAlias alias="archivo"       type="cl.falabella.b2b.intol.beans.Archivo" />
+   <typeAlias alias="credencial"    type="cl.falabella.b2b.intol.beans.Credencial" />
+   <typeAlias alias="tupla"         type="cl.falabella.b2b.intol.beans.Tupla" />
+
+   <parameterMap id="file-mapping" class="map">
+      <parameter property="proveedor"                    javaType="java.lang.Long"     jdbcType="NUMBER"       mode="IN" />
+      <parameter property="usuario"                      javaType="java.lang.Long"     jdbcType="NUMBER"       mode="IN" />
+      <parameter property="tipoDocumento"                javaType="java.lang.String"   jdbcType="VARCHAR"      mode="IN" />
+      <parameter property="extension"                    javaType="java.lang.String"   jdbcType="VARCHAR"      mode="IN" />
+      <parameter property="archivoGenerado"              javaType="java.lang.String"   jdbcType="VARCHAR"      mode="OUT" />
+      <parameter property="recepcion"                    javaType="java.lang.String"   jdbcType="VARCHAR"      mode="OUT" />
+   </parameterMap>
+   
+   <resultMap id="data-mapping" class="archivo">
+      <result property="id"                              column="ID"                   jdbcType="NUMBER"/>
+      <result property="data"                            column="DATA"                 jdbcType="BLOB"/>
+      <result property="tipo"                            column="TIPO"                 jdbcType="VARCHAR"/>
+      <result property="estado.key"                      column="ESTADOID"             jdbcType="VARCHAR"/>
+      <result property="estado.value"                    column="ESTADODESCRIPCION"    jdbcType="VARCHAR"/>
+   </resultMap>   
+        
+   <parameterMap id="file-historico-mapping" class="map">
+      <parameter property="id"                           javaType="java.lang.Long"     jdbcType="NUMBER"       mode="IN" />
+      <parameter property="estado"                       javaType="java.lang.Long"     jdbcType="NUMBER"       mode="IN" />
+      <parameter property="tipo"                         javaType="java.lang.String"   jdbcType="VARCHAR"      mode="IN" />
+      <parameter property="usuario"                      javaType="java.lang.Long"     jdbcType="NUMBER"       mode="IN" />
+      <parameter property="proveedor"                    javaType="java.lang.Long"     jdbcType="NUMBER"       mode="IN" />
+      <parameter property="referencia"                   javaType="java.lang.String"   jdbcType="VARCHAR"      mode="IN" />
+      <parameter property="extension"                    javaType="java.lang.String"   jdbcType="VARCHAR"      mode="IN" />
+      <parameter property="archivo"                      javaType="java.lang.String"   jdbcType="VARCHAR"      mode="IN" />
+      <parameter property="integracion"                  javaType="java.lang.String"   jdbcType="VARCHAR"      mode="IN" />
+      <parameter property="fechaProceso"                 javaType="java.lang.String"   jdbcType="VARCHAR"      mode="IN" />
+   </parameterMap>
+   
+   <parameterMap id="getAgendaHorario-mapping" class="java.util.Map">
+      <parameter property="P_ALMACEN"         javaType="java.lang.Long"       jdbcType="NUMBER"          mode="IN" />
+      <parameter property="P_TIPOMUELLE"      javaType="java.lang.String"     jdbcType="VARCHAR"         mode="IN" />
+      <parameter property="P_TURNO"           javaType="java.lang.String"     jdbcType="VARCHAR"         mode="IN" />
+      <parameter property="P_FECHA"           javaType="java.util.Date"       jdbcType="DATE"            mode="IN" />
+      <parameter property="P_CALXML"          javaType="java.lang.String"     jdbcType="CLOB"            mode="OUT" />
+      <parameter property="P_CODERROR"        javaType="java.lang.Integer"       jdbcType="NUMERIC"          mode="OUT" />
+      <parameter property="P_DESCERROR"       javaType="java.lang.String"     jdbcType="VARCHAR"         mode="OUT" />      
+   </parameterMap>
+   
+   <parameterMap id="getAgendaHorarioSemanal-mapping" class="java.util.Map">
+      <parameter property="P_ALMACEN"         javaType="java.lang.Long"       jdbcType="NUMBER"          mode="IN" />
+      <parameter property="P_TIPOMUELLE"      javaType="java.lang.String"     jdbcType="VARCHAR"         mode="IN" />
+      <parameter property="P_TURNO"           javaType="java.lang.String"     jdbcType="VARCHAR"         mode="IN" />
+      <parameter property="P_FECHA"           javaType="java.util.Date"       jdbcType="DATE"            mode="IN" />
+      <parameter property="P_CALXML"          javaType="java.lang.String"     jdbcType="CLOB"            mode="OUT" />
+      <parameter property="P_CODERROR"        javaType="java.lang.Integer"       jdbcType="NUMERIC"          mode="OUT" />
+      <parameter property="P_DESCERROR"       javaType="java.lang.String"     jdbcType="VARCHAR"         mode="OUT" />      
+   </parameterMap>
+    
+   <parameterMap id="getCalculaVentana" class="java.util.Map">
+      <parameter property="P_XML"                javaType="java.lang.String"       jdbcType="CLOB"          mode="IN" />
+      <parameter property="P_VENTANAS"           javaType="java.lang.Integer"     jdbcType="NUMERIC"         mode="OUT" />
+      <parameter property="P_CODERROR"           javaType="java.lang.Integer"     jdbcType="NUMERIC"         mode="OUT" />
+      <parameter property="P_DESCERROR"          javaType="java.lang.String"     jdbcType="VARCHAR"            mode="OUT" />
+   </parameterMap>
+   
+   <parameterMap id="getCalendarioVentana-mapping" class="map">
+      <parameter property="id"                           javaType="java.lang.Long"     jdbcType="NUMBER"       mode="IN" />
+      <parameter property="estado"                       javaType="java.lang.Long"     jdbcType="NUMBER"       mode="IN" />
+      <parameter property="tipo"                         javaType="java.lang.String"   jdbcType="VARCHAR"      mode="IN" />
+      <parameter property="usuario"                      javaType="java.lang.Long"     jdbcType="NUMBER"       mode="IN" />
+      <parameter property="proveedor"                    javaType="java.lang.Long"     jdbcType="NUMBER"       mode="IN" />
+      <parameter property="referencia"                   javaType="java.lang.String"   jdbcType="VARCHAR"      mode="IN" />
+      <parameter property="extension"                    javaType="java.lang.String"   jdbcType="VARCHAR"      mode="IN" />
+      <parameter property="archivo"                      javaType="java.lang.String"   jdbcType="VARCHAR"      mode="IN" />
+      <parameter property="integracion"                  javaType="java.lang.String"   jdbcType="VARCHAR"      mode="IN" />
+      <parameter property="fechaProceso"                 javaType="java.lang.String"   jdbcType="VARCHAR"      mode="IN" />
+   </parameterMap>
+
+   <parameterMap id="callAgendarMap" class="java.util.Map">
+       
+       <parameter property="P_ACCION"           jdbcType="VARCHAR"     javaType="java.lang.String"     mode="IN" />        
+       <parameter property="P_MUELLE"           jdbcType="VARCHAR"     javaType="java.lang.String"     mode="IN"/>
+       <parameter property="P_ALMACEN"          jdbcType="VARCHAR"     javaType="java.lang.String"     mode="IN"/>
+       <parameter property="P_ORG_LVL_CHILD"    jdbcType="NUMERIC"     javaType="java.lang.Integer"    mode="IN"/>
+       <parameter property="P_VPC_TECH_KEY"     jdbcType="NUMERIC"     javaType="java.lang.Integer"    mode="IN"/>
+       <parameter property="P_NRUT"             jdbcType="NUMERIC"     javaType="java.lang.Integer"    mode="IN"/>
+       <parameter property="P_TURNO"            jdbcType="VARCHAR"     javaType="java.lang.String"     mode="IN"/>
+       <parameter property="P_FECHA_AGENDA"     jdbcType="DATE"         javaType="java.util.Date"      mode="IN"/>
+       <parameter property="P_ENTRADA_UNICA"    jdbcType="VARCHAR"     javaType="java.lang.String"     mode="IN"/>
+       <parameter property="P_HORA_INICIO"      jdbcType="VARCHAR"     javaType="java.lang.String"     mode="IN"/>
+       <parameter property="P_HORA_FIN"         jdbcType="VARCHAR"     javaType="java.lang.String"     mode="IN"/>
+       <parameter property="P_TIPO_MUELLE"      jdbcType="VARCHAR"     javaType="java.lang.String"     mode="IN"/>
+       <parameter property="P_NUM_MUELLE"        jdbcType="NUMEIC"     javaType="java.lang.Integer"    mode="IN"/>
+       <parameter property="P_CODERROR"         jdbcType="NUMERIC"     javaType="java.lang.Integer"   mode="OUT" />
+       <parameter property="P_DESCERROR"        jdbcType="VARCHAR"     javaType="java.lang.String"    mode="OUT" />
+       <parameter property="P_COD_AGENDA"        jdbcType="NUMERIC"     javaType="java.lang.Integer"    mode="OUT" />
+  
+   </parameterMap> 
+   <select id="getFechaSistema" resultClass="java.util.Date">
+      select sysdate
+      from dual
+   </select>
+
+   <select id="getUserPassword" resultClass="java.lang.String">
+      select xclave
+      from   b2b_proveedorretaile p,
+             b2b_usuariose        u
+      where  u.vpc_tech_key = p.vpc_tech_key
+      and    p.nrut         = #rutEmpresa#
+      and    u.nrut         = #rutUsuario#
+      and    u.bactivo      = 'T'
+   </select>
+   
+   <select id="getTelefonoTamano" resultClass="extrainfo" parameterClass="map">
+  select ef.nfolio f12,ef.xtelefono_dsp telefono,decode(max(tb.ntamano),5,'SBT',4,'BT','MT') tipoProducto, max(inter.xtel_celular) celular, max(inter.xemail) mail, max(ef.vpc_tech_key) vpc  
+        from b2b_prdfamiliae     pf,
+             b2b_dsptamanobultoe tb,
+             b2b_srx_dspdetallee     df,
+             b2b_srx_dspencabezadoe  ef,
+             b2b_prdencabezadoe p ,
+             b2b_srx_dspdatosinternete inter
+       where pf.prd_lvl_child = df.prd_lvl_child
+         and ef.nfolio = #f12#
+         and pf.prd_parent_id = 1
+         and ef.nfolio = df.nfolio
+         and tb.prd_lvl_child = pf.prd_lvl_parent
+         and p.prd_lvl_child=pf.prd_lvl_child
+         and inter.nfolio = ef.nfolio
+         and p.prd_lvl_number in <iterate prepend="" property="skus" open="(" close=")" conjunction=",">#skus[]#</iterate>
+      group by ef.nfolio, ef.xtelefono_dsp, ef.xdirec_dsp
+      union all
+      select env.nfolio_docto f12,
+             enc.xtelefono_dsp telefono,
+             decode(max(bto.ntamano), 5, 'SBT', 4, 'BT', 'MT') tipoProducto, max(inter.xtel_celular) celular, max(inter.xemail) mail, max(enc.vpc_tech_key) vpc  
+        from b2b_envmaestroe     env,
+             b2b_envdetallee     det,
+             b2b_prdfamiliae     fam,
+             b2b_prdencabezadoe  prd,
+             b2b_dsptamanobultoe bto,
+             b2b_srx_dspencabezadoe  enc,
+             b2b_srx_dspdatosinternete inter
+      where env.nfolio_docto = #f12#
+         and det.nfer_tech_key = env.nfer_tech_key
+         and det.prd_lvl_child = fam.prd_lvl_child
+         and fam.prd_parent_id = 1
+         and prd.prd_lvl_child = fam.prd_lvl_child
+         and prd.prd_lvl_number in <iterate prepend="" property="skus" open="(" close=")" conjunction=",">#skus[]#</iterate>
+         and bto.prd_lvl_child = fam.prd_lvl_parent
+         and enc.nfolio = det.nfolio
+         and inter.nfolio = enc.nfolio
+      group by env.nfolio_docto, enc.xtelefono_dsp, enc.xdirec_dsp
+   </select>
+
+   <insert id="addLog" parameterClass="map">
+      insert into B2B_AUDWS (C_ID, D_REQUEST, X_XMLREQUEST) values
+                            (#id#, #fecha#, #xml#)
+   </insert>
+
+   <insert id="addLogRequest" parameterClass="map">
+      <selectKey keyProperty="id" resultClass="long">
+         select SEQ_B2B_AUDWSE.nextval as id from dual
+      </selectKey>
+      insert into B2B_AUDWSE (C_ID, A_NOMBREWS, D_REQUEST, X_XMLREQUEST) values
+                             (#id#, #tipo#, #fecha#, #xml#)
+   </insert>
+
+   <update id="addLogResponse" parameterClass="map">
+      update B2B_AUDWSE set D_RESPONSE = #fecha#,
+                            X_XMLRESPONSE = #xml#,
+                            C_CODRES = #codigo#,
+                            A_DESCRES = #descripcion#
+                      where C_ID = #id#
+   </update>
+   
+   
+   <procedure id="setFile" parameterMap="file-mapping">
+      { call b2b_arch_f.nrecep_file(?, ?, ?, ?, ?, ?) }
+   </procedure>
+   
+   <insert id="addFile" parameterClass="map">
+      insert into b2b_documentosblobe( nrecep_envio, 
+                                       a_archivocargado)
+      values(  #recepcion#,
+               #archivo#)
+   </insert>
+   
+   <select id="getFile" resultMap="data-mapping">
+      select  enc.a_archivocargado as data, 
+              enc.nrecep_envio as id,
+              det.ctipo_dcm as tipo,
+              det.cestado_dcm as estadoId,
+              est.xdescripcion as estadoDescripcion              
+      from    b2b_documentosblobe enc,
+              b2b_documentose det,
+              b2b_tipodocumentoe tip,
+              b2b_estadodocumentose est
+      where   enc.nrecep_envio   = det.nrecep_envio
+      and     det.ctipo_dcm      = tip.ctipo_dcm
+      and     tip.xorigen        = 'INTERNO'
+      and     det.cestado_dcm    = 2
+      and     det.cestado_dcm    = est.cestado_dcm
+      and     det.vpc_tech_key   = #proveedor#
+      and     det.bdownload_WS      = 'F'
+      <dynamic prepend="and">
+         <isNotNull property="recepcion">
+            enc.nrecep_envio     = #recepcion#
+         </isNotNull>
+      </dynamic>
+      <dynamic prepend="and">
+         <isNotNull property="fechaDesde">
+            det.dcreacion        >= #fechaDesde#
+         </isNotNull>
+      </dynamic>
+      <dynamic prepend="and">
+         <isNotNull property="fechaHasta">
+            det.dcreacion        &lt;= #fechaHasta#
+         </isNotNull>
+      </dynamic>
+      <dynamic prepend="and">
+         <isNotNull property="tipo">
+            det.ctipo_dcm        = #tipo#
+         </isNotNull>
+      </dynamic>
+      order by det.dcreacion desc
+   </select>   
+   
+   <update id="setFlagFile" parameterClass="map">
+      update  b2b_documentose
+      set     bdownload_WS = 'T'
+      where   nrecep_envio = #recepcion#   
+   </update>
+   
+   <select id="getCredencialByUser" resultClass="credencial">
+      select p.vpc_tech_key as proveedor,
+             u.usr_b2b_key as usuario
+      from   b2b_proveedorretaile p,
+             b2b_usuariose        u
+      where  u.vpc_tech_key = p.vpc_tech_key
+      and    p.nrut         = #rutEmpresa#
+      and    u.nrut         = #rutUsuario#
+      and    u.bactivo      = 'T'
+   </select>
+      
+   <select id="getErrorByFolio" resultClass="tupla">
+      select cerror as key,
+             adtlerror as value
+      from   b2b_docerrordetallee
+      where  nfolio = #folio#
+      order by csecuencia
+   </select>
+   
+   <select id="getFileById" resultMap="data-mapping">
+      select  doc.nrecep_envio as id,
+              doc.ctipo_dcm as tipo,
+              doc.cestado_dcm as estadoId,
+              est.xdescripcion as estadoDescripcion,
+              '' as data
+      from    b2b_documentose doc,
+              b2b_estadodocumentose est
+      where   doc.cestado_dcm    = est.cestado_dcm
+      and     doc.nrecep_envio   = #id#
+   </select>
+   
+   <procedure id="addFileDetalle" parameterMap="file-historico-mapping">
+      { call b2b_rgt_dcm(?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }
+   </procedure>   
+   
+   <select id="getParametroGeneral" resultClass="java.lang.String">
+         select XVALPARAMST
+         from   b2b_parametrose p
+         where  p.cparamst = #cparamst#
+         and    p.xparamst = #xparamst#
+   </select>
+
+   <select id="getParametroGeneralByCodigo" resultClass="java.lang.String">
+         select XVALPARAMST
+         from   b2b_parametrose p
+         where  p.cparamst = #cparamst#         
+   </select>  
+   
+    <procedure id="getconsultaAgendaHorario"  parameterMap="getAgendaHorario-mapping">
+        {  call PKG_AGU.PROC_CALENDARIO(?,?,?,?,?,?,?)}
+    </procedure> 
+
+
+    <procedure id="getCalculaVentanas"  parameterMap="getCalculaVentana">
+        {  call PKG_AGU.PROC_CALCULAVENTANAS(?,?,?,?)}
+    </procedure> 
+
+   <procedure id="AgendaUnicaAgendar" parameterMap="callAgendarMap">  
+      {  call PKG_AGU.PROC_AGENDAR(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }
+   </procedure>
+       
+   <insert id="addPreProcesamiento" parameterClass="map">
+      <selectKey keyProperty="id" resultClass="long">
+         select B2B_AGENDA_PRE_AGENDA_SEQ.nextval as id from dual
+      </selectKey>
+      insert into B2B_AU_PRE_AGENDA (ID, ID_REFERENCIA, FECHA_ENVIO, LLAVE_AGENDA,SISTEMA,COD_AGENDA) values
+              (#id#, #IdReferencia#, #FechaSistema#, #LlaveAgenda#,#Sistema#,#codAgenda#)
+   </insert>   
+   
+   <select id="getReferenceId" resultClass="Integer">
+    SELECT B2B_AGENDA_REFERENCIA_ID_SEQ.nextval as id from dual
+   </select>
+        
+     <procedure id="getconsultaAgendaHorarioSemanal"  parameterMap="getAgendaHorarioSemanal-mapping">
+        {  call PKG_AGU.PROC_CALENDARIO_SEMANAL(?,?,?,?,?,?,?)}
+    </procedure> 
+            
+</sqlMap>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://b2b.falabella.com/schemas/ol/info-cambioestado-request" targetNamespace="http://b2b.falabella.com/schemas/ol/info-cambioestado-request" elementFormDefault="qualified">
+	<xs:element name="info-cambioestado-request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operacion" type="xs:int"/>
+				<xs:element name="viaje" type="xs:int"/>
+				<xs:element name="local" type="xs:string"/>
+				<xs:element name="fhevento" type="xs:string"/>
+				<xs:element name="evento" type="xs:int"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

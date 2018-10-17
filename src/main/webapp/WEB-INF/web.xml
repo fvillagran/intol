@@ -1,0 +1,59 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5" xmlns="http://java.sun.com/xml/ns/javaee">
+   <description>web.xml file for INTOL</description>
+   <listener>
+      <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+   </listener>
+   <context-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>
+         /WEB-INF/b2b-ol-config.xml
+         /WEB-INF/b2b-ol-domain.xml
+         /WEB-INF/b2b-ol-persistence.xml
+         /WEB-INF/b2b-ol-services.xml
+         /WEB-INF/b2b-ol-scheduling.xml
+         /WEB-INF/b2b-ol-ws.xml
+      </param-value>
+   </context-param>
+   <servlet>
+      <servlet-name>CXFServlet</servlet-name>
+      <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+      <load-on-startup>1</load-on-startup>
+   </servlet>
+   <!-- proxool -->
+   <servlet>
+      <servlet-name>proxool</servlet-name>
+      <servlet-class>org.logicalcobwebs.proxool.admin.servlet.AdminServlet</servlet-class>
+      <load-on-startup>4</load-on-startup>
+   </servlet>
+    <servlet>
+        
+      <servlet-name>SabInfoViajeServlet</servlet-name>
+      <servlet-class>cl.falabella.b2b.intol.servlet.SabInfoViajeServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>CXFServlet</servlet-name>
+      <url-pattern>/ws/*</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+      <servlet-name>proxool</servlet-name>
+      <url-pattern>/servlet/proxool</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+		<servlet-name>SabInfoViajeServlet</servlet-name>
+		<url-pattern>/servlet/SabInfoViajeServlet</url-pattern>
+	</servlet-mapping>
+   <session-config>
+      <session-timeout>35</session-timeout>
+   </session-config>
+   <mime-mapping>
+      <extension>html</extension>
+      <mime-type>text/html</mime-type>
+   </mime-mapping>
+   <mime-mapping>
+      <extension>txt</extension>
+      <mime-type>text/plain</mime-type>
+   </mime-mapping>
+</web-app>

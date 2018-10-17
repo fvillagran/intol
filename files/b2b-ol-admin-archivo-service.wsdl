@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions 
+    targetNamespace="http://b2b.falabella.com/service/ol/admin-archivo" 
+    xmlns:tns="http://b2b.falabella.com/service/ol/admin-archivo"	
+    xmlns:uprequest="http://b2b.falabella.com/schemas/ol/admin-archivo-carga-request"
+    xmlns:upresponse="http://b2b.falabella.com/schemas/ol/admin-archivo-carga-response"	
+    xmlns:downrequest="http://b2b.falabella.com/schemas/ol/admin-archivo-descarga-request" 
+    xmlns:downresponse="http://b2b.falabella.com/schemas/ol/admin-archivo-descarga-response" 
+    xmlns:getrequest="http://b2b.falabella.com/schemas/ol/admin-archivo-consulta-request" 
+    xmlns:getresponse="http://b2b.falabella.com/schemas/ol/admin-archivo-consulta-response" 
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <wsdl:types>
+        <xs:schema elementFormDefault="qualified">
+            <xs:import namespace="http://b2b.falabella.com/schemas/ol/admin-archivo-carga-request" schemaLocation="b2b-ol-admin-archivo-carga-request.xsd" />
+            <xs:import namespace="http://b2b.falabella.com/schemas/ol/admin-archivo-carga-response" schemaLocation="b2b-ol-admin-archivo-carga-response.xsd" />
+            <xs:import namespace="http://b2b.falabella.com/schemas/ol/admin-archivo-descarga-request" schemaLocation="b2b-ol-admin-archivo-descarga-request.xsd" />
+            <xs:import namespace="http://b2b.falabella.com/schemas/ol/admin-archivo-descarga-response" schemaLocation="b2b-ol-admin-archivo-descarga-response.xsd" />
+            <xs:import namespace="http://b2b.falabella.com/schemas/ol/admin-archivo-consulta-request" schemaLocation="b2b-ol-admin-archivo-consulta-request.xsd" />
+            <xs:import namespace="http://b2b.falabella.com/schemas/ol/admin-archivo-consulta-response" schemaLocation="b2b-ol-admin-archivo-consulta-response.xsd" />
+        </xs:schema>
+    </wsdl:types>
+
+    <wsdl:message name="inCargaMessage">
+        <wsdl:part name="request-carga" element="uprequest:admin-archivo-carga-request" />
+    </wsdl:message>    
+    <wsdl:message name="outCargaMessage">
+        <wsdl:part name="response-carga" element="upresponse:admin-archivo-carga-response" />
+    </wsdl:message>
+    <wsdl:message name="inDescargaMessage">
+        <wsdl:part name="request-descarga" element="downrequest:admin-archivo-descarga-request" />
+    </wsdl:message>	
+    <wsdl:message name="outDescargaMessage">
+        <wsdl:part name="response-descarga" element="downresponse:admin-archivo-descarga-response" />
+    </wsdl:message>
+    <wsdl:message name="inConsultaMessage">
+        <wsdl:part name="request-consulta" element="getrequest:admin-archivo-consulta-request" />
+    </wsdl:message>	
+    <wsdl:message name="outConsultaMessage">
+        <wsdl:part name="response-consulta" element="getresponse:admin-archivo-consulta-response" />
+    </wsdl:message>
+    
+    <wsdl:portType name="AdminArchivoService">
+        <wsdl:operation name="carga-archivo">
+            <wsdl:input message="tns:inCargaMessage" />
+            <wsdl:output message="tns:outCargaMessage" />
+        </wsdl:operation>
+        <wsdl:operation name="descarga-archivo">
+            <wsdl:input message="tns:inDescargaMessage" />
+            <wsdl:output message="tns:outDescargaMessage" />
+        </wsdl:operation>
+        <wsdl:operation name="consulta-archivo">
+            <wsdl:input message="tns:inConsultaMessage" />
+            <wsdl:output message="tns:outConsultaMessage" />
+        </wsdl:operation>    		        
+    </wsdl:portType>
+    
+    <wsdl:binding name="AdminArchivoServiceBinding" type="tns:AdminArchivoService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="carga-archivo">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="descarga-archivo">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="consulta-archivo">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>        
+    </wsdl:binding>
+
+    <wsdl:service name="AdminArchivoService">
+        <wsdl:port name="AdminArchivoService" binding="tns:AdminArchivoServiceBinding">
+            <soap:address location="http://192.9.200.237:8988/intol/ws/AdminArchivoService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

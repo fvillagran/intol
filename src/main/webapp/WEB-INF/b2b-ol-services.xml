@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:aop="http://www.springframework.org/schema/aop"
+   xmlns:tx="http://www.springframework.org/schema/tx"
+   xsi:schemaLocation="
+   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+   <!-- The transaction Manager -->
+   <!-- bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+      <property name="dataSource" ref="dataSource"/>
+   </bean>
+
+   <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+      <property name="transactionManager" ref="txManager" />
+   </bean>
+   
+   
+   <tx:annotation-driven transaction-manager="txManager" / -->
+   
+   <!-- The services -->
+   <bean id="b2bService" class="cl.falabella.b2b.intol.service.impl.B2bServiceImpl">
+      <constructor-arg ref="b2bDAO" />
+   </bean>
+   
+
+   <bean id="aguService" class="cl.falabella.b2b.intol.service.impl.AgendaUnicaServiceImpl">
+      <constructor-arg ref="b2bDAO" />
+   </bean>   
+
+   <bean id="srxService" class="cl.falabella.b2b.intol.service.impl.SrxServiceImpl">
+      <constructor-arg ref="parentescoService" />
+      <constructor-arg ref="srxDAO" />
+   </bean>
+
+    <bean id="sabService" class="cl.falabella.b2b.intol.service.impl.SabServiceImpl">
+        <constructor-arg ref="sabDAO" />
+        <constructor-arg ref="sabTottusDAO" />        
+        <constructor-arg ref="infoviajeService"/>
+    </bean>
+
+   <bean id="trlService" class="cl.falabella.b2b.intol.service.impl.TrlServiceImpl">
+      <constructor-arg ref="trlDAO" />
+   </bean>
+   
+    <bean id="infoviajeService" class="cl.falabella.b2b.intol.ws.trl.viaje.service.InfoViajeServiceImpl">
+        <constructor-arg ref="trlService" />
+    </bean>  
+
+   <bean id="parentescoService" scope="singleton" class="cl.falabella.b2b.intol.service.impl.ParentescoServiceImpl">
+      <constructor-arg>
+         <map>
+            <entry key="CONYUGE"    value="1" />
+            <entry key="TRABAJADOR" value="2" />
+            <entry key="CONSERJE"   value="3" />
+            <entry key="HIJO"       value="4" />
+            <entry key="PADRE"      value="5" />
+            <entry key="SUEGRO"     value="6" />
+            <entry key="TIO"        value="7" />
+            <entry key="SOBRINO"    value="8" />
+            <entry key="AMIGO"      value="9" />
+            <entry key="VECINO"     value="10" />
+            <entry key="CLIENTE"    value="99" />
+         </map>
+      </constructor-arg>
+   </bean>
+</beans>

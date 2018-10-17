@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:sec="http://cxf.apache.org/configuration/security"
+       xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
+       xmlns:cxf="http://cxf.apache.org/core"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+        http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd
+        http://cxf.apache.org/configuration/security http://cxf.apache.org/schemas/configuration/security.xsd
+        http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+        http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
+
+    <import resource="classpath:META-INF/cxf/cxf.xml" />
+    <import resource="classpath*:META-INF/cxf/cxf-extension-*.xml" />
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+    <bean id="myPasswordCallback"
+          class="cl.falabella.b2b.intol.service.ServerPasswordCallback">
+        <constructor-arg ref="b2bService" />
+        <constructor-arg>
+            <bean class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"/>
+        </constructor-arg>
+        <constructor-arg value="true" />
+    </bean>
+
+    <jaxws:endpoint id="entregaDocumentoService"
+                        address="/entregaDocumentoService"
+                        endpointName="EntregaDocumentoService"
+                        serviceName="samp:EntregaDocumentoService"
+                        wsdlLocation="WEB-INF/wsdl/b2b-ol-entrega-documento-service.wsdl"
+                        xmlns:samp="http://b2b.falabella.com/service/ol/entrega-documento">
+        <jaxws:implementor>
+            <bean class="cl.falabella.b2b.intol.ws.entregadocumento.service.EntregaDocumentoServiceImpl">
+                <constructor-arg ref="srxService" />
+                <constructor-arg ref="b2bService" />
+                <constructor-arg ref="trlService" />
+            </bean>
+        </jaxws:implementor>
+        <jaxws:inInterceptors>
+            <bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor"/>
+            <bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+                <constructor-arg>
+                    <map>
+                        <entry key="action" value="UsernameToken"/>
+                        <entry key="passwordType" value="PasswordText"/>
+                        <entry key="passwordCallbackRef">
+                            <ref bean="myPasswordCallback"/>
+                        </entry>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </jaxws:inInterceptors>
+
+        <jaxws:properties>
+            <entry key="schema-validation-enabled" value="true" />
+        </jaxws:properties>
+    </jaxws:endpoint>
+
+    <jaxws:endpoint id="infoPaletService"
+                        address="/infoPaletService"
+                        endpointName="InfoPaletService"
+                        serviceName="samp:InfoPaletService"
+                        wsdlLocation="WEB-INF/wsdl/b2b-ol-info-palet-service.wsdl"
+                        xmlns:samp="http://b2b.falabella.com/service/ol/info-palet">
+        <jaxws:implementor>
+            <bean class="cl.falabella.b2b.intol.ws.infopalet.service.InfoPaletServiceImpl">
+                <constructor-arg ref="sabService" />
+                <constructor-arg ref="b2bService" />
+                <constructor-arg value="${config.ol.infoPalet.empresa}" />
+                <constructor-arg value="${config.ol.infoPalet.tipo-carga}" />
+            </bean>
+        </jaxws:implementor>
+        <jaxws:inInterceptors>
+            <bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor"/>
+            <bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+                <constructor-arg>
+                    <map>
+                        <entry key="action" value="UsernameToken"/>
+                        <entry key="passwordType" value="PasswordText"/>
+                        <entry key="passwordCallbackRef">
+                            <ref bean="myPasswordCallback"/>
+                        </entry>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </jaxws:inInterceptors>
+
+        <jaxws:properties>
+            <entry key="schema-validation-enabled" value="true" />
+        </jaxws:properties>
+    </jaxws:endpoint>
+   
+    <jaxws:endpoint id="descPaletService"
+                    address="/descPaletService"
+                    endpointName="DescPaletService"
+                    serviceName="samp:DescPaletService"
+                    wsdlLocation="WEB-INF/wsdl/b2b-ol-desc-palet-service.wsdl"
+                    xmlns:samp="http://b2b.falabella.com/service/ol/desc-palet">
+        <jaxws:implementor>
+            <bean class="cl.falabella.b2b.intol.ws.descpalet.service.DescPaletServiceImpl">
+                <constructor-arg ref="sabService" />
+                <constructor-arg ref="b2bService" />
+                <constructor-arg value="${config.ol.infoPalet.empresa}" />
+                <constructor-arg value="${config.ol.infoPalet.tipo-descarga}" />
+            </bean>
+        </jaxws:implementor>
+        <jaxws:inInterceptors>
+            <bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor"/>
+            <bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+                <constructor-arg>
+                    <map>
+                        <entry key="action" value="UsernameToken"/>
+                        <entry key="passwordType" value="PasswordText"/>
+                        <entry key="passwordCallbackRef">
+                            <ref bean="myPasswordCallback"/>
+                        </entry>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </jaxws:inInterceptors>
+
+        <jaxws:properties>
+            <entry key="schema-validation-enabled" value="true" />
+        </jaxws:properties>
+    </jaxws:endpoint>
+   
+    <!-- Consulta informacion documento -->
+    <jaxws:endpoint id="infoDocumentoService"
+                    address="/infoDocumentoService"
+                    endpointName="InfoDocumentoService"
+                    serviceName="samp:InfoDocumentoService"
+                    wsdlLocation="WEB-INF/wsdl/b2b-ol-info-documento-service.wsdl"
+                    xmlns:samp="http://b2b.falabella.com/service/ol/info-documento">
+        <jaxws:implementor>
+            <bean class="cl.falabella.b2b.intol.ws.infodocumento.service.InfoDocumentoServiceImpl">
+                <constructor-arg ref="srxService" />
+                <constructor-arg ref="b2bService" />
+            </bean>
+        </jaxws:implementor>
+        <jaxws:inInterceptors>
+            <bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor"/>
+            <bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+                <constructor-arg>
+                    <map>
+                        <entry key="action" value="UsernameToken"/>
+                        <entry key="passwordType" value="PasswordText"/>
+                        <entry key="passwordCallbackRef">
+                            <ref bean="myPasswordCallback"/>
+                        </entry>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </jaxws:inInterceptors>
+      
+        <jaxws:properties>
+            <entry key="schema-validation-enabled" value="true" />
+        </jaxws:properties>
+    </jaxws:endpoint>
+   
+   
+   
+    <!-- Carga archivo -->
+    <jaxws:endpoint id="adminArchivoService"
+                    address="/adminArchivoService"
+                    endpointName="AdminArchivoService"
+                    serviceName="samp:AdminArchivoService"
+                    wsdlLocation="WEB-INF/wsdl/b2b-ol-admin-archivo-service.wsdl"
+                    xmlns:samp="http://b2b.falabella.com/service/ol/admin-archivo">
+        <jaxws:implementor>
+            <bean class="cl.falabella.b2b.intol.ws.adminarchivo.service.AdminArchivoServiceImpl">
+                <constructor-arg ref="srxService" />
+                <constructor-arg ref="b2bService" />
+            </bean>
+        </jaxws:implementor>
+        <jaxws:inInterceptors>
+            <bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor"/>
+            <bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+                <constructor-arg>
+                    <map>
+                        <entry key="action" value="UsernameToken"/>
+                        <entry key="passwordType" value="PasswordText"/>
+                        <entry key="passwordCallbackRef">
+                            <ref bean="myPasswordCallback"/>
+                        </entry>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </jaxws:inInterceptors>
+      
+        <jaxws:properties>
+            <entry key="schema-validation-enabled" value="true" />
+        </jaxws:properties>
+    </jaxws:endpoint>   
+    <!-- Agenda Venta en Verde -->   
+    <jaxws:endpoint id="agendaVerdeService"
+                    address="/agendaVerdeService"
+                    endpointName="AgendaVerdeServiceImpl"
+                    serviceName="samp:AgendaVerdeServiceImpl"
+                    wsdlLocation="WEB-INF/wsdl/b2b-ol-agenda-ventaverde-service.wsdl"
+                    xmlns:samp="http://b2b.falabella.com/service/ol/agenda-ventaverde">
+        <jaxws:implementor>
+            <bean class="cl.falabella.b2b.intol.ws.agendaventaverde.service.AgendaVerdeServiceImpl">
+                <constructor-arg ref="sabService" />
+            </bean>
+        </jaxws:implementor>
+      
+        <jaxws:inInterceptors>
+            <bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor"/>
+            <bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+                <constructor-arg>
+                    <map>
+                        <entry key="action" value="UsernameToken"/>
+                        <entry key="passwordType" value="PasswordText"/>
+                        <entry key="passwordCallbackRef">
+                            <ref bean="myPasswordCallback"/>
+                        </entry>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </jaxws:inInterceptors>
+   
+        <jaxws:properties>
+            <entry key="schema-validation-enabled" value="true" />
+        </jaxws:properties>
+    </jaxws:endpoint> 
+
+
+    <!-- Agenda unica -->  
+    <jaxws:endpoint id="agendaUnicaService"
+                    address="/agendaUnicaService"
+                    endpointName="AgendaUnicaService"
+                    serviceName="samp:AgendaUnicaService"
+                    wsdlLocation="WEB-INF/wsdl/b2b-ol-agenda-unica-service.wsdl"
+                    xmlns:samp="http://b2b.falabella.com/service/ol/agenda-unica">
+        <jaxws:implementor>
+            <bean class="cl.falabella.b2b.intol.ws.agendaunica.service.AgendaUnicaServiceImpl">
+                <constructor-arg ref="aguService" />
+            </bean>
+        </jaxws:implementor>
+      
+        <jaxws:inInterceptors>
+            <bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor"/>
+            <bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+                <constructor-arg>
+                    <map>
+                        <entry key="action" value="UsernameToken"/>
+                        <entry key="passwordType" value="PasswordText"/>
+                        <entry key="passwordCallbackRef">
+                            <ref bean="myPasswordCallback"/>
+                        </entry>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </jaxws:inInterceptors>
+      
+        <jaxws:properties>
+            <entry key="schema-validation-enabled" value="true" />
+        </jaxws:properties>
+    </jaxws:endpoint> 
+ 
+
+
+    <!-- TRL Info Cambio de Estado -->   
+    <jaxws:endpoint id="trlCambioEstadoService"
+                    address="/trlCambioEstadoService"
+                    endpointName="InfoCambioEstadoService"
+                    serviceName="samp:InfoCambioEstadoService"
+                    wsdlLocation="WEB-INF/wsdl/b2b-info-cambioestado-service.wsdl"
+                    xmlns:samp="http://b2b.falabella.com/service/ol/info-cambioestado">
+        <jaxws:implementor>
+            <bean class="cl.falabella.b2b.intol.ws.trl.ce.service.InfoCambioEstadoServiceImpl">
+                <constructor-arg ref="trlService" />
+            </bean>
+        </jaxws:implementor>
+        <jaxws:inInterceptors>
+            <bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor"/>
+            <bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+                <constructor-arg>
+                    <map>
+                        <entry key="action" value="UsernameToken"/>
+                        <entry key="passwordType" value="PasswordText"/>
+                        <entry key="passwordCallbackRef">
+                            <ref bean="myPasswordCallback"/>
+                        </entry>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </jaxws:inInterceptors>
+
+        <jaxws:properties>
+            <entry key="schema-validation-enabled" value="true" />
+        </jaxws:properties>
+    </jaxws:endpoint> 
+   
+    <!-- TRL GPS Info Viaje -->
+    <jaxws:endpoint id="trlInfoViajeService"
+                    address="/trlInfoViajeService"
+                    endpointName="InfoViajeService"
+                    serviceName="samp:InfoViajeService"
+                    wsdlLocation="WEB-INF/wsdl/b2b-info-viaje-service.wsdl"
+                    xmlns:samp="http://b2b.falabella.com/service/ol/info-viaje">
+        <jaxws:implementor>
+            <bean class="cl.falabella.b2b.intol.ws.trl.viaje.service.InfoViajeServiceImpl">
+                <constructor-arg ref="trlService" />
+            </bean>         
+        </jaxws:implementor>
+        <jaxws:inInterceptors>
+            <bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor"/>
+            <bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+                <constructor-arg>
+                    <map>
+                        <entry key="action" value="UsernameToken"/>
+                        <entry key="passwordType" value="PasswordText"/>
+                        <entry key="passwordCallbackRef">
+                            <ref bean="myPasswordCallback"/>
+                        </entry>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </jaxws:inInterceptors>
+
+        <jaxws:properties>
+            <entry key="schema-validation-enabled" value="true" />
+        </jaxws:properties>
+    </jaxws:endpoint>      
+     
+    <!-- TRL Validación de GPS -->
+    <jaxws:endpoint id="trlValidaPatenteService"
+                    address="/trlValidaPatenteService"
+                    endpointName="ValidaPatenteService"
+                    serviceName="samp:ValidaPatenteService"
+                    wsdlLocation="WEB-INF/wsdl/b2b-valida-patente-service.wsdl"
+                    xmlns:samp="http://b2b.falabella.com/service/ol/valida-patente">
+        <jaxws:implementor>
+            <bean class="cl.falabella.b2b.intol.ws.trl.validagps.service.ValidaPatenteServiceImpl">
+                <constructor-arg ref="trlService" />
+            </bean>         
+        </jaxws:implementor>
+        <jaxws:inInterceptors>
+            <bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor"/>
+            <bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+                <constructor-arg>
+                    <map>
+                        <entry key="action" value="UsernameToken"/>
+                        <entry key="passwordType" value="PasswordText"/>
+                        <entry key="passwordCallbackRef">
+                            <ref bean="myPasswordCallback"/>
+                        </entry>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </jaxws:inInterceptors>
+
+        <jaxws:properties>
+            <entry key="schema-validation-enabled" value="true" />
+        </jaxws:properties>
+    </jaxws:endpoint>       
+    <cxf:bus>
+        <cxf:inInterceptors>
+            <bean class="org.apache.cxf.interceptor.LoggingInInterceptor"/>
+        </cxf:inInterceptors>
+        <cxf:outInterceptors>
+            <bean class="org.apache.cxf.interceptor.LoggingOutInterceptor"/>
+        </cxf:outInterceptors>
+    </cxf:bus>
+</beans>

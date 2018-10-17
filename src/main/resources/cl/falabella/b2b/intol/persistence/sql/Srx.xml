@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Srx">
+   <parameterMap id="entregaDocumento-param" class="map" >         
+      <parameter property="r"             jdbcType="VARCHAR"   javaType="java.lang.String"   mode="OUT" />
+      <parameter property="tipoDocumento" jdbcType="VARCHAR"   javaType="java.lang.String"   mode="IN" />
+      <parameter property="folio"         jdbcType="VARCHAR"   javaType="java.lang.String"   mode="IN" />
+      <parameter property="patente"       jdbcType="VARCHAR"   javaType="java.lang.String"   mode="IN" />
+      <parameter property="fecha"         jdbcType="VARCHAR"   javaType="java.lang.String"   mode="IN" />
+      <parameter property="latitud"       jdbcType="NUMERIC"   javaType="java.lang.Double"   mode="IN" />
+      <parameter property="longitud"      jdbcType="NUMERIC"   javaType="java.lang.Double"   mode="IN" />
+      <parameter property="noEntrega"     jdbcType="NUMERIC"   javaType="java.lang.Integer"  mode="IN" />
+      <parameter property="rut"           jdbcType="VARCHAR"   javaType="java.lang.String"   mode="IN" />
+      <parameter property="dv"            jdbcType="VARCHAR"   javaType="java.lang.String"   mode="IN" />
+      <parameter property="parentesco"    jdbcType="NUMERIC"   javaType="java.lang.Integer"  mode="IN" />
+      <parameter property="bultos"        jdbcType="NUMERIC"   javaType="java.lang.Integer"  mode="IN" />
+      <parameter property="autorizacion"  jdbcType="VARCHAR"   javaType="java.lang.String"   mode="IN" />
+      <parameter property="rutProveedor"  jdbcType="NUMERIC"   javaType="java.lang.Integer"   mode="IN" />
+   </parameterMap>
+
+   <parameterMap id="infoDocumento-param" class="map" >         
+      <parameter property="r"                jdbcType="VARCHAR"   javaType="java.lang.String"   mode="OUT" />
+      <parameter property="tipoDocumento"    jdbcType="VARCHAR"   javaType="java.lang.String"   mode="IN" />
+      <parameter property="numeroDocumento"  jdbcType="NUMBER"    javaType="java.lang.Long"     mode="IN" />
+      <parameter property="patente"          jdbcType="VARCHAR"   javaType="java.lang.String"   mode="IN" />
+      <parameter property="mantisa"          jdbcType="NUMBER"    javaType="java.lang.Long"     mode="IN" />
+      <parameter property="digito"           jdbcType="VARCHAR"   javaType="java.lang.String"   mode="IN" />
+      <parameter property="fechaEvento"      jdbcType="VARCHAR"   javaType="java.lang.String"   mode="IN" />
+      <parameter property="latitud"          jdbcType="NUMERIC"   javaType="java.lang.Double"   mode="IN" />
+      <parameter property="longitud"         jdbcType="NUMERIC"   javaType="java.lang.Double"   mode="IN" />
+   </parameterMap>
+
+    <parameterMap id="regEntregaDocumento-param" class="map" >         
+      <parameter property="tipoDocumento" jdbcType="VARCHAR"   javaType="java.lang.String"   mode="IN" />
+      <parameter property="folio"         jdbcType="VARCHAR"   javaType="java.lang.String"   mode="IN" />
+      <parameter property="patente"       jdbcType="VARCHAR"   javaType="java.lang.String"   mode="IN" />
+      <parameter property="fecha"         jdbcType="VARCHAR"   javaType="java.lang.String"   mode="IN" />
+    </parameterMap>
+   
+
+   <procedure id="entregaDocumento" parameterMap="entregaDocumento-param" >
+      { call ? := fun_wise_entrega_docto(?,?,?,nvl(?,to_char(sysdate, 'dd-mm-yyyy HH24:mi:ss')),nvl(?, 0),nvl(?, 0),?,?,?,?,?,?,?,'B2B') }
+   </procedure>
+      
+   <procedure id="infoDocumento" parameterMap="infoDocumento-param" >
+      { call ? := fun_wise_consulta_docto(?, ?, ?, ?, ?, ?, ?, ?) }
+   </procedure>
+
+
+   <procedure id="regEntregaDocumento" parameterMap="regEntregaDocumento-param" >
+      { call REG_ENT_DOCTO_B2B(?,?,?,nvl(?,to_char(sysdate, 'dd-mm-yyyy HH24:mi:ss'))) }
+   </procedure>
+</sqlMap>

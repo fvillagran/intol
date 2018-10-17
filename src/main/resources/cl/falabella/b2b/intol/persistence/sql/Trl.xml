@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Trl">
+
+    <typeAlias alias="error" type="cl.falabella.b2b.intol.beans.Error" />
+
+    <resultMap id="cambioEstado-result" class="error">
+        <result property = "descripcion" column = "P_SALIDA"/>
+        <result property = "codigo" column = "P_ESTPROC"/>
+    </resultMap>
+
+    <parameterMap id="cambioEstado-param" class="map" >         
+        <parameter property="P_OPERACION" jdbcType="NUMERIC" javaType="java.math.BigDecimal" mode="IN" />
+        <parameter property="P_CVIAJE" jdbcType="NUMERIC" javaType="java.math.BigDecimal" mode="IN" />
+        <parameter property="P_CLOCAL" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+        <parameter property="P_DFECHA" jdbcType="DATETIME" javaType="java.util.Date" mode="IN" />
+        <parameter property="P_CEVENTO" jdbcType="NUMERIC" javaType="java.math.BigDecimal" mode="IN" />
+        <parameter property="P_CADENA" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+        <parameter property="P_MSG" jdbcType="CLOB" javaType="java.lang.String" mode="IN" />
+        <parameter property="P_SALIDA" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT" />
+        <parameter property="P_ESTPROC" jdbcType="NUMERIC" javaType="java.math.BigDecimal" mode="OUT" />
+    </parameterMap>
+    
+    <parameterMap id="add-message-entrega-documento" class="map" >         
+        <parameter property="tipoMensaje"   jdbcType="VARCHAR"  javaType="java.lang.String"     mode="IN" />
+        <parameter property="sistema"       jdbcType="VARCHAR"  javaType="java.lang.String"     mode="IN" />
+        <parameter property="cadena"        jdbcType="NUMERIC"  javaType="java.lang.Integer"    mode="IN" />
+        <parameter property="consigna"      jdbcType="VARCHAR"  javaType="java.lang.String"     mode="IN" />
+        <parameter property="pais"          jdbcType="VARCHAR"  javaType="java.lang.String"     mode="IN" />
+        <parameter property="idMensaje"     jdbcType="NUMERIC"  javaType="java.lang.Integer"    mode="IN" />                
+        <parameter property="mensaje"       jdbcType="CLOB"     javaType="java.lang.String"     mode="IN" />
+    </parameterMap>
+
+    <parameterMap id="callEntregaDocumento-param" class="map" >         
+        <parameter property="MENSAJE"     jdbcType="CLOB"     javaType="java.lang.String"      mode="IN" />
+        <parameter property="P_ESTPROC"     jdbcType="NUMERIC"  javaType="java.lang.Integer"     mode="OUT" />
+        <parameter property="P_DESCPROC"    jdbcType="VARCHAR"  javaType="java.lang.String"      mode="OUT" />
+    </parameterMap>
+
+    <!-- funcion para obtener la disponibilidad de muelles -->
+    <procedure id="callCambioEstadoIngCamTRL" parameterMap="cambioEstado-param" resultMap="cambioEstado-result">  
+        { call TRL_CAMBIOESTADOWS(?,?,?,?,?,?,?,?,?) }
+    </procedure> 
+   
+    <select id="getParamValue" resultClass="java.lang.String">
+        select A_VALOR from trl_paramef where c_param = #parametro#
+    </select>
+    
+    <procedure id="addQueueMessage" parameterMap="add-message-entrega-documento" >
+        { call  put_TrlMsg( ?, ?, ?, ?, ?, ?, ? ) }
+    </procedure>
+
+    <procedure id="callEntregaDocumento" parameterMap="callEntregaDocumento-param">  
+        { call TRL_OMS_ENTREGA_DOCUMENTO(?,?,?) }
+    </procedure>
+
+</sqlMap>

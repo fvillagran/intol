@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SabTottus">
+   <typeAlias alias="sabviaje"     type="cl.falabella.b2b.intol.beans.viajes.infoviaje.SabViaje" />
+
+  <resultMap id="sabviaje-mapping" class="sabviaje">
+      <result property="fechaProceso"                column="D_PROCESO"    jdbcType="DARE"/>
+      <result property="creacion"                    column="D_CREACION"   jdbcType="DATE"/>
+      <result property="viaje"                       column="C_VIAJE"      jdbcType="NUMBER"/>
+      <result property="procesado"                   column="B_PROCESO"    jdbcType="VARCHAR"  javaType="java.lang.String"/>
+      <result property="mensaje"                     column="A_MENSAJE"    jdbcType="CLOB"     javaType="java.lang.String"/>
+   </resultMap> 
+   
+   <select id="getSabViajes" resultMap="sabviaje-mapping">
+      select D_PROCESO,
+             D_CREACION,
+             C_VIAJE,
+             B_PROCESO,
+             A_MENSAJE
+      from   sabf_viajes
+      where  b_proceso='F'
+    </select>
+
+	<update id="setSabViajeProcesadosetSabViajeProcesado" parameterClass="map">
+      update  sabf_viajes
+      set     B_PROCESO = #procesado#,
+              D_PROCESO = sysdate
+      where   C_VIAJE   = #viaje#
+   </update>
+</sqlMap>

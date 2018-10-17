@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:resp="http://mdwcorp.falabella.com/LOG/CORP/WLS/schema/WMOS/Appointment/Resp/v2017.02" targetNamespace="http://mdwcorp.falabella.com/LOG/CORP/WLS/schema/WMOS/Appointment/Resp/v2017.02" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="AppointmentResp" type="resp:AppointmentResp_TYPE"/>
+  <xs:complexType name="AppointmentResp_TYPE">
+    <xs:sequence>
+      <xs:element name="RespuestaConsulta">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Ok"/>
+            <xs:enumeration value="NoOk"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

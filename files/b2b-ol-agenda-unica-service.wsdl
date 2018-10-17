@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:agdu="http://b2b.falabella.com/schemas/ol/agenda_unica_horario" xmlns:agduca="http://b2b.falabella.com/schemas/ol/agenda_unica_agendar" xmlns:agducv="http://b2b.falabella.com/schemas/ol/agenda_unica_calcula_ventana" xmlns:agduresp="http://b2b.falabella.com/schemas/ol/agenda_unica_calcula_ventanaresp" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://b2b.falabella.com/service/ol/agenda-unica" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://b2b.falabella.com/service/ol/agenda-unica">
+	<wsdl:types>
+		<xs:schema elementFormDefault="qualified">
+			<xs:import namespace="http://b2b.falabella.com/schemas/ol/agenda_unica_horario" schemaLocation="b2b-ol-agenda-unica-horario.xsd"/>
+			<xs:import namespace="http://b2b.falabella.com/schemas/ol/agenda_unica_calcula_ventana" schemaLocation="b2b-ol-agenda-unica-calcula-ventana.xsd"/>
+			<xs:import namespace="http://b2b.falabella.com/schemas/ol/agenda_unica_calcula_ventanaresp" schemaLocation="b2b-ol-agenda-unica-calcula-ventanaresp.xsd"/>
+			<xs:import namespace="http://b2b.falabella.com/schemas/ol/agenda_unica_agendar" schemaLocation="b2b-ol-agenda-unica-agendar.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="consultaHorarioRequest">
+		<wsdl:part name="request" element="agdu:Archivo"/>
+	</wsdl:message>
+	<wsdl:message name="consultaHorarioResponse">
+		<wsdl:part name="response" element="agdu:Archivo"/>
+	</wsdl:message>
+	<wsdl:message name="calculaVentanaRequest">
+		<wsdl:part name="request" element="agducv:agu-planification"/>
+	</wsdl:message>
+	<wsdl:message name="calculaVentanaResponse">
+		<wsdl:part name="response" element="agduresp:Archivo"/>
+	</wsdl:message>
+	<wsdl:message name="agendarRequest">
+		<wsdl:part name="request" element="agduca:Archivo"/>
+	</wsdl:message>
+	<wsdl:message name="agendarResponse">
+		<wsdl:part name="response" element="agduca:Archivo"/>
+	</wsdl:message>
+	<wsdl:portType name="AgendaUnicaService">
+		<wsdl:operation name="consultaHorario">
+			<wsdl:input message="tns:consultaHorarioRequest"/>
+			<wsdl:output message="tns:consultaHorarioResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="calculaVentana">
+			<wsdl:input message="tns:calculaVentanaRequest"/>
+			<wsdl:output message="tns:calculaVentanaResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="agendar">
+			<wsdl:input message="tns:agendarRequest"/>
+			<wsdl:output message="tns:agendarResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="AgendaUnicaServiceBinding" type="tns:AgendaUnicaService">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="consultaHorario">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="calculaVentana">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="agendar">
+			<soap:operation soapAction=""/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="AgendaUnicaService">
+		<wsdl:port name="AgendaUnicaService" binding="tns:AgendaUnicaServiceBinding">
+			<soap:address location="http://127.0.0.1/AgendaUnica"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

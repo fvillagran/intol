@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://b2b.falabella.com/schemas/ol/desc-palet-request"
+            targetNamespace="http://b2b.falabella.com/schemas/ol/desc-palet-request"
+            elementFormDefault="qualified">
+  <xsd:element name="desc-palet-request" type="desc-palet-request"/>
+  <xsd:complexType name="desc-palet-request">
+    <xsd:sequence>
+      <xsd:element name="numero-palet" type="xsd:string"/>
+      <xsd:element name="numero-expedicion" type="xsd:integer"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
