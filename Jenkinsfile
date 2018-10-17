@@ -1,15 +1,8 @@
-pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine' 
-            args '-v /root/.m2:/root/.m2' 
-        }
+node{
+    stage('SCM Checkout'){
+        git 'https://github.com/fvillagran/intol'
     }
-    stages {
-        stage('Build') { 
-            steps {
-                sh 'mvn -B -DskipTests clean package' 
-            }
-        }
+    stage('Compile-Package'){
+        sh 'mvn package' 
     }
 }
